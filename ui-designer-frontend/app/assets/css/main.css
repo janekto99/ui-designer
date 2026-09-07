@@ -1,0 +1,276 @@
+@import 'tailwindcss';
+@import '../../designs/visionos.css';
+
+@source '../../../app';
+
+/* Tmavý režim řídí třída na <html>, kterou nastavuje @nuxtjs/color-mode. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* SF Pro se na web dát nesmí (licence Applu). Na Macu ho vytáhne
+     -apple-system, jinde se to degraduje na systémové písmo. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', system-ui,
+    sans-serif;
+
+  /* Typografická škála visionOS. Prokládání i letter-spacing jsou z Figmy. */
+  --text-xl-title-1: 48px;
+  --text-xl-title-1--line-height: 56px;
+  --text-xl-title-1--letter-spacing: -0.4px;
+
+  --text-xl-title-2: 38px;
+  --text-xl-title-2--line-height: 46px;
+  --text-xl-title-2--letter-spacing: -0.4px;
+
+  --text-large-title: 29px;
+  --text-large-title--line-height: 38px;
+  --text-large-title--letter-spacing: -0.4px;
+
+  --text-title-1: 24px;
+  --text-title-1--line-height: 32px;
+  --text-title-1--letter-spacing: -0.4px;
+
+  --text-title-2: 22px;
+  --text-title-2--line-height: 28px;
+  --text-title-2--letter-spacing: -0.4px;
+
+  --text-title-3: 19px;
+  --text-title-3--line-height: 24px;
+  --text-title-3--letter-spacing: -0.4px;
+
+  --text-headline: 17px;
+  --text-headline--line-height: 22px;
+  --text-headline--letter-spacing: -0.4px;
+
+  --text-body: 17px;
+  --text-body--line-height: 22px;
+  --text-body--letter-spacing: -0.4px;
+
+  --text-callout: 15px;
+  --text-callout--line-height: 20px;
+  --text-callout--letter-spacing: -0.4px;
+
+  --text-subheadline: 15px;
+  --text-subheadline--line-height: 20px;
+  --text-subheadline--letter-spacing: -0.4px;
+
+  --text-footnote: 13px;
+  --text-footnote--line-height: 18px;
+  --text-footnote--letter-spacing: -0.4px;
+
+  --text-caption-1: 12px;
+  --text-caption-1--line-height: 16px;
+  --text-caption-1--letter-spacing: -0.4px;
+
+  --text-caption-2: 12px;
+  --text-caption-2--line-height: 16px;
+  --text-caption-2--letter-spacing: -0.4px;
+}
+
+/* ------------------------------------------------------------------ sklo */
+
+/*
+ * Základ každého skleněného prvku. Sám o sobě nic nevykreslí — barvy si bere
+ * z proměnných `--control-*`, které nastavuje až konkrétní varianta níž.
+ *
+ * `isolation: isolate` je tu kvůli pseudoprvkům: přesvit má z-index -1, takže
+ * se kreslí nad vlastní pozadí prvku, ale pod jeho obsah. Bez izolace by
+ * propadl pod pozadí rodiče.
+ */
+@utility vos-surface {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--control-tint, transparent);
+  background-image: linear-gradient(var(--control-veil, transparent), var(--control-veil, transparent));
+  box-shadow: var(--control-box-shadow, none);
+  backdrop-filter: blur(var(--control-radius-blur, 0px)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--control-radius-blur, 0px)) saturate(180%);
+  transition-property: background-color, background-image, box-shadow, color, opacity, transform;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Specular obrys — 1px prstenec vyplněný přechodem. Maskou se vyřízne
+     vnitřek, takže zbude jen okraj a kopíruje border-radius. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--specular-gradient);
+    opacity: var(--control-specular-opacity, 0);
+    transition: opacity 180ms cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: none;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  /* Přesvit pod kurzorem */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--hover-glow);
+    opacity: 0;
+    transition: opacity 180ms cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: none;
+  }
+}
+
+/* Bez podložky. Sklo se objeví až pod kurzorem — přesně jako ve visionOS. */
+@utility vos-plain {
+  color: var(--fg-primary);
+  --control-tint: transparent;
+  --control-veil: transparent;
+  --control-specular-opacity: 0;
+  --control-box-shadow: none;
+  --control-radius-blur: 0px;
+
+  &:hover:not(:disabled) {
+    --control-tint: var(--platter-tint);
+    --control-veil: var(--platter-veil);
+    --control-specular-opacity: 1;
+    --control-box-shadow: var(--control-shadow);
+    --control-radius-blur: var(--control-blur);
+  }
+
+  &:hover:not(:disabled)::after {
+    opacity: 1;
+  }
+
+  &:active:not(:disabled) {
+    --control-tint: var(--platter-tint-active);
+    --control-veil: var(--platter-veil-active);
+    --control-box-shadow: var(--control-shadow-active);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+  }
+}
+
+/* S podložkou. Vidět je pořád, pod kurzorem jen přibude přesvit. */
+@utility vos-glass {
+  color: var(--fg-primary);
+  --control-tint: var(--platter-tint);
+  --control-veil: var(--platter-veil);
+  --control-specular-opacity: 1;
+  --control-box-shadow: var(--control-shadow);
+  --control-radius-blur: var(--control-blur);
+
+  &:hover:not(:disabled)::after {
+    opacity: 1;
+  }
+
+  &:active:not(:disabled) {
+    --control-tint: var(--platter-tint-active);
+    --control-veil: var(--platter-veil-active);
+    --control-box-shadow: var(--control-shadow-active);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+    --control-tint: var(--platter-tint-disabled);
+    --control-veil: var(--platter-veil-disabled);
+    --control-specular-opacity: 0;
+    --control-box-shadow: none;
+  }
+}
+
+/* Vybraný stav — plná neprůhledná výplň, obrácený text. Žádné sklo. */
+@utility vos-selected {
+  color: var(--fg-on-selected);
+  --control-tint: var(--selected-bg);
+  --control-veil: transparent;
+  --control-specular-opacity: 0;
+  --control-box-shadow: var(--control-shadow);
+  --control-radius-blur: 0px;
+
+  &:hover:not(:disabled) {
+    --control-tint: var(--selected-bg-hover);
+  }
+
+  &:active:not(:disabled) {
+    --control-tint: var(--selected-bg-active);
+    --control-box-shadow: var(--control-shadow-active);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+    --control-tint: var(--platter-tint-disabled);
+    --control-veil: var(--platter-veil-disabled);
+    --control-box-shadow: none;
+  }
+}
+
+/* Okno / panel — velké rozostření a dva stíny (Blur + Shadow Big z Figmy). */
+@utility vos-panel {
+  position: relative;
+  isolation: isolate;
+  color: var(--fg-primary);
+  background-color: var(--panel-tint);
+  background-image: linear-gradient(var(--panel-veil), var(--panel-veil));
+  backdrop-filter: blur(var(--panel-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--panel-blur)) saturate(180%);
+  box-shadow: var(--panel-shadow);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--specular-gradient);
+    pointer-events: none;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+}
+
+/* Vyhloubená plocha — do ní se sází náhled. */
+@utility vos-recessed {
+  box-shadow: var(--recessed-shadow);
+}
+
+/*
+ * Scéna pod sklem. Panel má rozostření 100px, takže by se přes něj pozadí
+ * <body> rozmazalo do jednolité plochy a sklo tlačítka by nemělo co lomit.
+ * Náhled si proto scénu kreslí znovu, ostře. `fixed` ji drží spojitou přes
+ * všechny náhledy na stránce.
+ */
+@utility vos-stage {
+  background: var(--preview-backdrop);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* ------------------------------------------------------------- základ */
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  color: var(--fg-primary);
+  background: var(--preview-backdrop) fixed;
+  background-size: cover;
+}

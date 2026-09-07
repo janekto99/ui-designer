@@ -1,0 +1,170 @@
+/*
+ * Design: Apple visionOS 26
+ *
+ * Hodnoty pocházejí z Figma UI Kitu (viz figma/reference/SPEC.md).
+ * Tmavý režim je originál — visionOS žádný jiný nemá. Světlý režim je
+ * odvozený; v SPEC.md je u každé skupiny napsáno, co je změřené a co dopočtené.
+ *
+ * Pozor na specificitu: světlý blok je `.design-visionos` (0,1,0), tmavý
+ * `.design-visionos.dark` (0,2,0). Až přibude druhý design, jeho světlý blok
+ * bude taky (0,1,0) a nesmí přebít tmavé hodnoty toho prvního — proto ta
+ * dvojtřída, ne `.dark .design-visionos`.
+ */
+
+/* ---------------------------------------------------------------- světlý */
+
+.design-visionos {
+  color-scheme: light;
+
+  /* Systémová paleta — světlé varianty.
+     Modrá #0091FF je z Figmy (`Colors/Blue`), zbytek je standardní paleta
+     Apple pro světlý režim. */
+  --vos-red: #ff3b30;
+  --vos-orange: #ff9500;
+  --vos-yellow: #ffcc00;
+  --vos-green: #34c759;
+  --vos-mint: #00c7be;
+  --vos-teal: #30b0c7;
+  --vos-cyan: #32ade6;
+  --vos-blue: #0091ff;
+  --vos-indigo: #5856d6;
+  --vos-purple: #af52de;
+  --vos-pink: #ff2d55;
+  --vos-brown: #a2845e;
+  --vos-gray: #8e8e93;
+
+  /* Text */
+  --fg-primary: rgb(0 0 0 / 0.95);
+  --fg-secondary: rgb(0 0 0 / 0.55);
+  --fg-tertiary: rgb(0 0 0 / 0.3);
+  --fg-disabled: rgb(0 0 0 / 0.3);
+  --fg-on-selected: #ffffff;
+
+  /* Výplň ovládacích prvků — dvě vrstvy: `tint` je barevný podklad,
+     `veil` je bílý závoj přes něj. Ve Figmě jsou to taky dvě výplně. */
+  --platter-tint: rgb(255 255 255 / 0.42);
+  --platter-veil: rgb(255 255 255 / 0.18);
+  --platter-tint-active: rgb(255 255 255 / 0.68);
+  --platter-veil-active: rgb(255 255 255 / 0.26);
+  --platter-tint-disabled: rgb(255 255 255 / 0.2);
+  --platter-veil-disabled: transparent;
+
+  /* Vybraný stav — plná neprůhledná výplň, obrácený text */
+  --selected-bg: rgb(0 0 0 / 0.85);
+  --selected-bg-hover: rgb(0 0 0 / 0.78);
+  --selected-bg-active: rgb(0 0 0 / 0.7);
+
+  /* Specular obrys: lineární přechod, ne plná čára. Světlá hrana nahoře,
+     slabší odlesk dole, uprostřed nic. */
+  --specular-gradient: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.95) 0%,
+    rgb(255 255 255 / 0.25) 30%,
+    rgb(255 255 255 / 0.2) 70%,
+    rgb(255 255 255 / 0.6) 100%
+  );
+
+  /* Přesvit pod kurzorem — dva radiální přechody, shora a zdola */
+  --hover-glow:
+    radial-gradient(120% 140% at 50% -25%, rgb(255 255 255 / 0.5) 0%, transparent 62%),
+    radial-gradient(120% 140% at 50% 125%, rgb(255 255 255 / 0.28) 0%, transparent 62%);
+
+  /* Rozostření a stíny */
+  --control-blur: 24px;
+  --control-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 4px 12px rgb(0 0 0 / 0.06);
+  --control-shadow-active: 0 1px 1px rgb(0 0 0 / 0.06);
+
+  --panel-tint: rgb(255 255 255 / 0.5);
+  --panel-veil: rgb(255 255 255 / 0.22);
+  --panel-blur: 100px;
+  --panel-shadow: 0 40px 80px rgb(0 0 0 / 0.18), 0 7px 10px rgb(0 0 0 / 0.07);
+
+  /* Recessed — vyhloubená plocha: tmavý vnitřní stín shora, světlá linka */
+  --recessed-shadow:
+    inset 0 1.5px 4px rgb(0 0 0 / 0.1),
+    inset 0 -0.5px 1px rgb(255 255 255 / 0.5);
+
+  --focus-ring: rgb(0 0 0 / 0.45);
+
+  /* Scéna pod sklem. Až budeš chtít fotku, stačí přepsat tuhle proměnnou:
+     --preview-backdrop: url('/backdrops/tvoje-fotka.jpg') center / cover no-repeat; */
+  --preview-backdrop:
+    radial-gradient(120% 90% at 12% 6%, #ffd9a8 0%, transparent 55%),
+    radial-gradient(110% 80% at 88% 14%, #cfe4ff 0%, transparent 58%),
+    radial-gradient(150% 120% at 50% 112%, #6f97bd 0%, transparent 62%),
+    linear-gradient(165deg, #a9c9e9 0%, #e2eaf3 45%, #b6c5cf 100%);
+}
+
+/* ------------------------------------------------------------------ tmavý */
+
+.design-visionos.dark {
+  color-scheme: dark;
+
+  /* Systémová paleta — tmavé varianty, všechny z Figmy */
+  --vos-red: #ff453a;
+  --vos-orange: #ff9f0a;
+  --vos-yellow: #ffd60a;
+  --vos-green: #32d74b;
+  --vos-mint: #66d4cf;
+  --vos-teal: #6ac4dc;
+  --vos-cyan: #5ac8f5;
+  --vos-blue: #0a84ff;
+  --vos-indigo: #5e5ce6;
+  --vos-purple: #bf5af2;
+  --vos-pink: #ff375f;
+  --vos-brown: #ac8e68;
+  --vos-gray: #98989d;
+
+  --fg-primary: #ffffff;
+  --fg-secondary: rgb(255 255 255 / 0.6);
+  --fg-tertiary: rgb(255 255 255 / 0.3);
+  --fg-disabled: rgb(255 255 255 / 0.3);
+  --fg-on-selected: #000000;
+
+  /* Změřeno ve Figmě: idle = bílá 6 % nad šedou #5E5E5E 18 %,
+     pinch = bílá 16 % nad šedou 36 %, disabled = bílá 3 %. */
+  --platter-tint: rgb(94 94 94 / 0.18);
+  --platter-veil: rgb(255 255 255 / 0.06);
+  --platter-tint-active: rgb(94 94 94 / 0.36);
+  --platter-veil-active: rgb(255 255 255 / 0.16);
+  --platter-tint-disabled: transparent;
+  --platter-veil-disabled: rgb(255 255 255 / 0.03);
+
+  --selected-bg: #ffffff;
+  --selected-bg-hover: rgb(255 255 255 / 0.92);
+  --selected-bg-active: rgb(255 255 255 / 0.84);
+
+  /* Z Figmy: bílá 40 % → 0 % → 0 % → 10 % */
+  --specular-gradient: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.4) 0%,
+    rgb(255 255 255 / 0) 30%,
+    rgb(255 255 255 / 0) 70%,
+    rgb(255 255 255 / 0.1) 100%
+  );
+
+  --hover-glow:
+    radial-gradient(120% 140% at 50% -25%, rgb(255 255 255 / 0.18) 0%, transparent 62%),
+    radial-gradient(120% 140% at 50% 125%, rgb(255 255 255 / 0.1) 0%, transparent 62%);
+
+  --control-blur: 24px;
+  --control-shadow: 0 1px 2px rgb(0 0 0 / 0.24), 0 6px 16px rgb(0 0 0 / 0.18);
+  --control-shadow-active: 0 1px 1px rgb(0 0 0 / 0.2);
+
+  --panel-tint: rgb(94 94 94 / 0.24);
+  --panel-veil: rgb(255 255 255 / 0.06);
+  --panel-blur: 100px;
+  --panel-shadow: 0 40px 80px rgb(0 0 0 / 0.3), 0 7px 10px rgb(0 0 0 / 0.09);
+
+  --recessed-shadow:
+    inset 0 1.5px 4px rgb(0 0 0 / 0.35),
+    inset 0 -0.5px 1px rgb(255 255 255 / 0.25);
+
+  --focus-ring: rgb(255 255 255 / 0.55);
+
+  --preview-backdrop:
+    radial-gradient(120% 90% at 15% 8%, #3d3070 0%, transparent 55%),
+    radial-gradient(110% 80% at 85% 16%, #12496d 0%, transparent 58%),
+    radial-gradient(150% 120% at 50% 115%, #2c2040 0%, transparent 60%),
+    linear-gradient(165deg, #12121b 0%, #1c1c28 50%, #08080d 100%);
+}
