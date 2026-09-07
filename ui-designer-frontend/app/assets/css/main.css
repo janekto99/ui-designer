@@ -212,6 +212,106 @@
   }
 }
 
+/*
+ * Barevné obsazení prvku. Nenese tvar ani stav — jen říká, ze které trojice
+ * tokenů se berou barvy. Kombinuje se s `vos-plain` / `vos-glass` /
+ * `vos-selected`, které naopak řeší sklo a nevědí nic o významu.
+ */
+@utility vos-tone-neutral {
+  --tone: var(--tone-neutral);
+  --tone-strong: var(--tone-neutral-strong);
+  --tone-surface: var(--tone-neutral-surface);
+  --tone-solid: var(--tone-neutral-solid);
+}
+
+@utility vos-tone-accent {
+  --tone: var(--tone-accent);
+  --tone-strong: var(--tone-accent-strong);
+  --tone-surface: var(--tone-accent-surface);
+  --tone-solid: var(--tone-accent-solid);
+}
+
+@utility vos-tone-success {
+  --tone: var(--tone-success);
+  --tone-strong: var(--tone-success-strong);
+  --tone-surface: var(--tone-success-surface);
+  --tone-solid: var(--tone-success-solid);
+}
+
+@utility vos-tone-warning {
+  --tone: var(--tone-warning);
+  --tone-strong: var(--tone-warning-strong);
+  --tone-surface: var(--tone-warning-surface);
+  --tone-solid: var(--tone-warning-solid);
+}
+
+@utility vos-tone-danger {
+  --tone: var(--tone-danger);
+  --tone-strong: var(--tone-danger-strong);
+  --tone-surface: var(--tone-danger-surface);
+  --tone-solid: var(--tone-danger-solid);
+}
+
+@utility vos-tone-info {
+  --tone: var(--tone-info);
+  --tone-strong: var(--tone-info-strong);
+  --tone-surface: var(--tone-info-surface);
+  --tone-solid: var(--tone-info-solid);
+}
+
+/* Měkká barevná výplň — text v sytějším odstínu téže barvy. */
+@utility vos-soft {
+  color: var(--tone-strong);
+  --control-tint: var(--tone-surface);
+  --control-veil: transparent;
+  --control-specular-opacity: 0;
+  --control-box-shadow: none;
+  --control-radius-blur: 0px;
+
+  &:hover:not(:disabled) {
+    --control-tint: var(--tone-solid);
+    color: var(--tone-solid-fg);
+  }
+
+  &:active:not(:disabled) {
+    --control-tint: var(--tone-solid);
+    color: var(--tone-solid-fg);
+    filter: brightness(0.92);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+    --control-tint: var(--platter-tint-disabled);
+    --control-veil: var(--platter-veil-disabled);
+  }
+}
+
+/* Plná barevná výplň. Neprůhledná — na rozdíl od skla nic nepropouští. */
+@utility vos-solid {
+  color: var(--tone-solid-fg);
+  --control-tint: var(--tone-solid);
+  --control-veil: transparent;
+  --control-specular-opacity: 0;
+  --control-box-shadow: var(--control-shadow);
+  --control-radius-blur: 0px;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.08);
+  }
+
+  &:active:not(:disabled) {
+    filter: brightness(0.94);
+    --control-box-shadow: var(--control-shadow-active);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+    --control-tint: var(--platter-tint-disabled);
+    --control-veil: var(--platter-veil-disabled);
+    --control-box-shadow: none;
+  }
+}
+
 /* Okno / panel — velké rozostření a dva stíny (Blur + Shadow Big z Figmy). */
 @utility vos-panel {
   position: relative;

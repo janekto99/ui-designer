@@ -116,6 +116,56 @@
   --badge-fill: var(--vos-red);
   --badge-fg: #ffffff;
 
+  /*
+   * Sémantické tóny. Paleta výš říká, jaká je barva; tohle říká, co znamená.
+   * Bez téhle vrstvy by si každá komponenta sáhla na `--vos-red` sama a
+   * „nevratná akce" a „horší hodnota" by skončily u stejného odstínu z jiného
+   * důvodu — a při změně by se musely hledat obě.
+   *
+   * `-surface` je měkká výplň pod text téže barvy. `-strong` je odstín, který
+   * má na té výplni dost kontrastu; `--tone-*` sám na ni nestačí.
+   */
+  --tone-accent: var(--vos-blue);
+  --tone-accent-strong: #0071cc;
+  --tone-accent-surface: rgb(0 145 255 / 0.14);
+
+  --tone-success: var(--vos-green);
+  --tone-success-strong: #248a3d;
+  --tone-success-surface: rgb(52 199 89 / 0.16);
+
+  --tone-warning: var(--vos-orange);
+  --tone-warning-strong: #a85700;
+  --tone-warning-surface: rgb(255 149 0 / 0.18);
+
+  --tone-danger: var(--vos-red);
+  --tone-danger-strong: #c9271c;
+  --tone-danger-surface: rgb(255 59 48 / 0.14);
+
+  --tone-info: var(--vos-cyan);
+  --tone-info-strong: #0a7ea4;
+  --tone-info-surface: rgb(50 173 230 / 0.16);
+
+  --tone-neutral: var(--fg-secondary);
+  --tone-neutral-strong: var(--fg-primary);
+  --tone-neutral-surface: rgb(0 0 0 / 0.07);
+
+  /*
+   * Plná výplň tlačítka. Ve světlém režimu hluboký odstín s bílým textem,
+   * v tmavém sytý s černým — je to stejná logika, jakou už má `selected`
+   * (bílá s černým textem), jen obarvená.
+   *
+   * Systémové odstíny se pro plnou výplň použít nedají: bílá na `#0091FF`
+   * má poměr 3,2 : 1 a na WCAG AA to nestačí. Apple to tak ve svém kitu má,
+   * ale to z toho čitelný text neudělá.
+   */
+  --tone-solid-fg: #ffffff;
+  --tone-accent-solid: #0071cc;
+  --tone-success-solid: #1f7a35;
+  --tone-warning-solid: #8f4a00;
+  --tone-danger-solid: #b3221a;
+  --tone-info-solid: #0a6f90;
+  --tone-neutral-solid: rgb(0 0 0 / 0.85);
+
   --focus-ring: rgb(0 0 0 / 0.45);
 
   /* Scéna pod sklem. Až budeš chtít fotku, stačí přepsat tuhle proměnnou:
@@ -219,6 +269,40 @@
 
   --badge-fill: var(--vos-red);
   --badge-fg: #ffffff;
+
+  /* V tmavém režimu je `-strong` světlejší, ne tmavší — kontrast se počítá
+     proti tmavému podkladu, takže se musí jít nahoru, ne dolů. */
+  --tone-accent: var(--vos-blue);
+  --tone-accent-strong: #5eb1ff;
+  --tone-accent-surface: rgb(10 132 255 / 0.22);
+
+  --tone-success: var(--vos-green);
+  --tone-success-strong: #6ee787;
+  --tone-success-surface: rgb(50 215 75 / 0.2);
+
+  --tone-warning: var(--vos-orange);
+  --tone-warning-strong: #ffc056;
+  --tone-warning-surface: rgb(255 159 10 / 0.22);
+
+  --tone-danger: var(--vos-red);
+  --tone-danger-strong: #ff8078;
+  --tone-danger-surface: rgb(255 69 58 / 0.22);
+
+  --tone-info: var(--vos-cyan);
+  --tone-info-strong: #7dd8f8;
+  --tone-info-surface: rgb(90 200 245 / 0.2);
+
+  --tone-neutral: var(--fg-secondary);
+  --tone-neutral-strong: var(--fg-primary);
+  --tone-neutral-surface: rgb(255 255 255 / 0.1);
+
+  --tone-solid-fg: #000000;
+  --tone-accent-solid: var(--vos-blue);
+  --tone-success-solid: var(--vos-green);
+  --tone-warning-solid: var(--vos-orange);
+  --tone-danger-solid: var(--vos-red);
+  --tone-info-solid: var(--vos-cyan);
+  --tone-neutral-solid: #ffffff;
 
   --focus-ring: rgb(255 255 255 / 0.55);
 

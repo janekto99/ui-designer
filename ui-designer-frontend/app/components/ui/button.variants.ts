@@ -7,6 +7,10 @@ import { tv, type VariantProps } from 'tailwind-variants'
  * Hover a active tady nejsou — jsou to `:hover` / `:active` na skle (viz
  * `vos-plain` a spol. v main.css), protože v originále je to jen jiná
  * průhlednost téže výplně, ne jiná varianta.
+ *
+ * `variant` říká, **jak je prvek udělaný** (sklo, měkká výplň, plná výplň),
+ * `tone` **co znamená**. Jsou to dvě nezávislé osy: nevratná akce může být
+ * tichá i křiklavá podle toho, kde stojí.
  */
 export const button = tv({
   slots: {
@@ -23,7 +27,19 @@ export const button = tv({
     variant: {
       plain: { base: 'vos-plain' },
       glass: { base: 'vos-glass' },
+      /** Měkká barevná výplň. S `tone="neutral"` splyne se sklem. */
+      soft: { base: 'vos-soft' },
+      /** Plná neprůhledná výplň. `selected` je jeho neutrální podoba. */
+      solid: { base: 'vos-solid' },
       selected: { base: 'vos-selected' },
+    },
+    tone: {
+      neutral: { base: 'vos-tone-neutral' },
+      accent: { base: 'vos-tone-accent' },
+      success: { base: 'vos-tone-success' },
+      warning: { base: 'vos-tone-warning' },
+      danger: { base: 'vos-tone-danger' },
+      info: { base: 'vos-tone-info' },
     },
     size: {
       xs: { base: 'h-7 gap-1 text-caption-1', icon: 'size-3.5' },
@@ -37,6 +53,10 @@ export const button = tv({
       true: { base: 'aspect-square p-0' },
       false: {},
     },
+    block: {
+      true: { base: 'w-full' },
+      false: {},
+    },
   },
   compoundVariants: [
     { iconOnly: false, size: 'xs', class: { base: 'px-2.5' } },
@@ -44,17 +64,32 @@ export const button = tv({
     { iconOnly: false, size: 'md', class: { base: 'px-4' } },
     { iconOnly: false, size: 'lg', class: { base: 'px-5' } },
     { iconOnly: false, size: 'xl', class: { base: 'px-6' } },
+    /* Sklo barvu nese jen v textu — obarvit i výplň by z něj udělalo `soft`. */
+    { variant: 'plain', tone: 'accent', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'plain', tone: 'success', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'plain', tone: 'warning', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'plain', tone: 'danger', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'plain', tone: 'info', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'glass', tone: 'accent', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'glass', tone: 'success', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'glass', tone: 'warning', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'glass', tone: 'danger', class: { base: 'text-(--tone-strong)' } },
+    { variant: 'glass', tone: 'info', class: { base: 'text-(--tone-strong)' } },
   ],
   defaultVariants: {
     variant: 'glass',
+    tone: 'neutral',
     size: 'md',
     iconOnly: false,
+    block: false,
   },
 })
 
 export type ButtonVariants = VariantProps<typeof button>
 export type ButtonSize = NonNullable<ButtonVariants['size']>
 export type ButtonVariant = NonNullable<ButtonVariants['variant']>
+export type Tone = NonNullable<ButtonVariants['tone']>
 
 export const buttonSizes: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl']
-export const buttonVariantNames: ButtonVariant[] = ['plain', 'glass', 'selected']
+export const buttonVariantNames: ButtonVariant[] = ['plain', 'glass', 'soft', 'solid', 'selected']
+export const tones: Tone[] = ['neutral', 'accent', 'success', 'warning', 'danger', 'info']

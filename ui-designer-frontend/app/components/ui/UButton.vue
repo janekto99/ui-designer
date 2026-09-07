@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { button, type ButtonSize, type ButtonVariant } from './button.variants'
+import { button, type ButtonSize, type ButtonVariant, type Tone } from './button.variants'
 import type { ClassValue } from '~/utils/cn'
 
 const props = withDefaults(
@@ -9,7 +9,11 @@ const props = withDefaults(
     /** Název ikony pro @nuxt/icon, např. `lucide:plus`. */
     icon?: string
     variant?: ButtonVariant
+    /** Význam, ne vzhled. Kombinuje se s `variant`. */
+    tone?: Tone
     size?: ButtonSize
+    /** Roztáhne tlačítko na plnou šířku rodiče. */
+    block?: boolean
     disabled?: boolean
     loading?: boolean
     type?: 'button' | 'submit' | 'reset'
@@ -21,7 +25,9 @@ const props = withDefaults(
     label: undefined,
     icon: undefined,
     variant: 'glass',
+    tone: 'neutral',
     size: 'md',
+    block: false,
     disabled: false,
     loading: false,
     type: 'button',
@@ -36,7 +42,13 @@ const hasLabel = computed(() => Boolean(props.label) || Boolean(slots.default))
 const iconOnly = computed(() => !hasLabel.value && Boolean(props.icon))
 
 const ui = computed(() =>
-  button({ variant: props.variant, size: props.size, iconOnly: iconOnly.value }),
+  button({
+    variant: props.variant,
+    tone: props.tone,
+    size: props.size,
+    iconOnly: iconOnly.value,
+    block: props.block,
+  }),
 )
 </script>
 

@@ -55,11 +55,10 @@ const props = withDefaults(
 
 defineEmits<{ control: [control: ActivityControl], action: [action: ActivityAction], trailing: [] }>()
 
-const toneClass = (tone: ActivityAction['tone']) => {
-  if (tone === 'accept') return 'bg-(--vos-green) font-semibold text-black hover:brightness-105'
-  if (tone === 'decline') return 'bg-(--vos-red) font-semibold text-white hover:brightness-110'
-  return 'vos-surface vos-glass'
-}
+/* Barvy si bere `UButton` z tónů; tady se jen překládá slovník karty. */
+const actionVariant = (tone: ActivityAction['tone']) => (tone === 'plain' ? 'glass' : 'solid')
+const actionTone = (tone: ActivityAction['tone']) =>
+  tone === 'accept' ? 'success' : tone === 'decline' ? 'danger' : 'neutral'
 </script>
 
 <template>
@@ -94,42 +93,30 @@ const toneClass = (tone: ActivityAction['tone']) => {
     </div>
 
     <div v-if="controls.length" class="flex items-center gap-2">
-      <button
+      <UButton
         v-for="control in controls"
         :key="control.label"
-        type="button"
+        :icon="control.icon"
+        :variant="control.destructive ? 'solid' : control.active ? 'selected' : 'glass'"
+        :tone="control.destructive ? 'danger' : 'neutral'"
         :aria-label="control.label"
         :aria-pressed="control.active"
-        :class="cn(
-          'flex h-11 flex-1 cursor-pointer items-center justify-center rounded-full outline-none',
-          'focus-visible:ring-2 focus-visible:ring-(--focus-ring)',
-          control.destructive
-            ? 'bg-(--vos-red) text-white hover:brightness-110'
-            : control.active
-              ? 'vos-surface vos-selected'
-              : 'vos-surface vos-glass',
-        )"
+        class="aspect-auto flex-1"
         @click="$emit('control', control)"
-      >
-        <Icon :name="control.icon" class="size-5" />
-      </button>
+      />
     </div>
 
     <div v-if="actions.length" class="flex items-center gap-2">
-      <button
+      <UButton
         v-for="action in actions"
         :key="action.label"
-        type="button"
-        :class="cn(
-          'flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full text-body outline-none',
-          'focus-visible:ring-2 focus-visible:ring-(--focus-ring)',
-          toneClass(action.tone),
-        )"
+        :label="action.label"
+        :icon="action.icon"
+        :variant="actionVariant(action.tone)"
+        :tone="actionTone(action.tone)"
+        class="flex-1"
         @click="$emit('action', action)"
-      >
-        <Icon v-if="action.icon" :name="action.icon" class="size-5" />
-        {{ action.label }}
-      </button>
+      />
     </div>
   </div>
 </template>

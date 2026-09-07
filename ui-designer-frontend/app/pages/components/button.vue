@@ -2,19 +2,23 @@
 import {
   buttonSizes,
   buttonVariantNames,
+  tones,
   type ButtonSize,
   type ButtonVariant,
+  type Tone,
 } from '~/components/ui/button.variants'
 
 type Fill = 'label' | 'icon' | 'both'
 type State = 'default' | 'disabled' | 'loading'
 
 const variant = ref<ButtonVariant>('glass')
+const tone = ref<Tone>('neutral')
 const size = ref<ButtonSize>('md')
 const fill = ref<Fill>('both')
 const state = ref<State>('default')
 
 const variantOptions = buttonVariantNames.map((value) => ({ label: value, value }))
+const toneOptions = tones.map((value) => ({ label: value, value }))
 const sizeOptions = buttonSizes.map((value) => ({ label: value, value }))
 
 const fillOptions: { label: string, value: Fill }[] = [
@@ -32,8 +36,6 @@ const stateOptions: { label: string, value: State }[] = [
 const preview = computed(() => ({
   label: fill.value === 'icon' ? undefined : 'Pokračovat',
   icon: fill.value === 'label' ? undefined : 'lucide:sparkles',
-  variant: variant.value,
-  size: size.value,
   disabled: state.value === 'disabled',
   loading: state.value === 'loading',
   ariaLabel: fill.value === 'icon' ? 'Pokračovat' : undefined,
@@ -44,6 +46,7 @@ const snippet = computed(() => {
     preview.value.label ? `label="${preview.value.label}"` : null,
     preview.value.icon ? `icon="${preview.value.icon}"` : null,
     `variant="${variant.value}"`,
+    tone.value === 'neutral' ? null : `tone="${tone.value}"`,
     `size="${size.value}"`,
     preview.value.disabled ? 'disabled' : null,
     preview.value.loading ? 'loading' : null,
@@ -55,28 +58,29 @@ const snippet = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <section class="vos-panel rounded-3xl p-6">
-      <header class="mb-6">
-        <h1 class="text-title-1 font-semibold">Button</h1>
-        <p class="mt-1 text-callout text-(--fg-secondary)">
-          Jedna komponenta, tři obsazení. Text dá pilulku, ikona kruh, obojí pilulku s ikonou vlevo.
-        </p>
-      </header>
-
-      <div class="mb-6 flex flex-wrap gap-x-8 gap-y-3">
+  <DocPage
+    title="Button"
+    description="Jedna komponenta, tři obsazení. Text dá pilulku, ikona kruh, obojí pilulku s ikonou vlevo."
+  >
+    <DocSection
+      title="Náhled"
+      description="variant říká, jak je prvek udělaný, tone co znamená. Jsou to dvě nezávislé osy — nevratná akce může být tichá i křiklavá podle toho, kde stojí."
+    >
+      <template #controls>
         <VariantPicker v-model="fill" label="Obsazení" :options="fillOptions" />
         <VariantPicker v-model="variant" label="Varianta" :options="variantOptions" />
+        <VariantPicker v-model="tone" label="Tón" :options="toneOptions" />
         <VariantPicker v-model="size" label="Velikost" :options="sizeOptions" />
         <VariantPicker v-model="state" label="Stav" :options="stateOptions" />
-      </div>
+      </template>
 
       <PreviewStage>
         <UButton
           :label="preview.label"
           :icon="preview.icon"
-          :variant="preview.variant"
-          :size="preview.size"
+          :variant="variant"
+          :tone="tone"
+          :size="size"
           :disabled="preview.disabled"
           :loading="preview.loading"
           :aria-label="preview.ariaLabel"
@@ -86,14 +90,23 @@ const snippet = computed(() => {
       <pre
         class="vos-recessed mt-4 overflow-x-auto rounded-2xl px-4 py-3 text-footnote text-(--fg-secondary)"
       ><code>{{ snippet }}</code></pre>
-    </section>
+    </DocSection>
 
-    <section class="vos-panel rounded-3xl p-6">
-      <h2 class="text-title-3 font-semibold">Všechny velikosti</h2>
-      <p class="mt-1 mb-4 text-footnote text-(--fg-secondary)">
-        Ikonové tlačítko je kruh v 28 · 32 · 44 · 52 · 64 px, textové pilulka o téže výšce.
-      </p>
+    <DocSection
+      title="Varianta × tón"
+      description="Sklo nese barvu jen v textu — obarvit i výplň by z něj udělalo soft. Plná výplň je ve světlém režimu hluboká s bílým textem, v tmavém sytá s černým."
+    >
+      <PreviewStage min-height="18rem">
+        <div class="flex flex-col gap-3">
+          <div v-for="v in buttonVariantNames" :key="v" class="flex items-center gap-3">
+            <span class="w-16 shrink-0 text-right text-caption-1 text-(--fg-tertiary)">{{ v }}</span>
+            <UButton v-for="t in tones" :key="t" :label="t" :variant="v" :tone="t" size="sm" />
+          </div>
+        </div>
+      </PreviewStage>
+    </DocSection>
 
+    <DocSection title="Všechny velikosti">
       <PreviewStage min-height="10rem">
         <UButton
           v-for="s in buttonSizes"
@@ -101,6 +114,7 @@ const snippet = computed(() => {
           icon="lucide:sparkles"
           :size="s"
           :variant="variant"
+          :tone="tone"
           :aria-label="`Ikonové tlačítko ${s}`"
         />
       </PreviewStage>
@@ -113,23 +127,9 @@ const snippet = computed(() => {
           icon="lucide:sparkles"
           :size="s"
           :variant="variant"
+          :tone="tone"
         />
       </PreviewStage>
-    </section>
-
-    <section class="vos-panel rounded-3xl p-6">
-      <h2 class="text-title-3 font-semibold">Všechny varianty</h2>
-      <p class="mt-1 mb-4 text-footnote text-(--fg-secondary)">
-        <code>plain</code> nemá podložku a sklo se objeví až pod kurzorem, <code>glass</code> ji má
-        pořád, <code>selected</code> je plná neprůhledná výplň s obráceným textem.
-      </p>
-
-      <PreviewStage min-height="10rem">
-        <div v-for="v in buttonVariantNames" :key="v" class="flex flex-col items-center gap-2">
-          <UButton :label="v" icon="lucide:sparkles" :variant="v" :size="size" />
-          <span class="text-caption-1 text-(--fg-tertiary)">{{ v }}</span>
-        </div>
-      </PreviewStage>
-    </section>
-  </div>
+    </DocSection>
+  </DocPage>
 </template>
