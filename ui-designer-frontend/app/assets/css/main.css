@@ -249,6 +249,75 @@
 }
 
 /*
+ * Škála podkladů z Figmy. Není to totéž co `vos-glass`: to je ovládací prvek,
+ * tohle je plocha, na které prvky leží. Seznam sedí na `thin`, menu na
+ * `regular`, alert na `thick`. Bez rozlišení by všechno splynulo do jedné
+ * vrstvy a hloubka by zmizela.
+ */
+@utility vos-view-thin {
+  background-color: var(--view-thin);
+  backdrop-filter: blur(var(--view-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--view-blur)) saturate(180%);
+}
+
+@utility vos-view-regular {
+  background-color: var(--view-regular);
+  backdrop-filter: blur(var(--view-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--view-blur)) saturate(180%);
+}
+
+@utility vos-view-thick {
+  background-color: var(--view-thick);
+  backdrop-filter: blur(var(--view-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--view-blur)) saturate(180%);
+}
+
+@utility vos-view-recessed {
+  background-color: var(--view-recessed);
+  box-shadow: var(--recessed-shadow);
+}
+
+/*
+ * Ukazatel činnosti. Apple netočí kolečkem, ale osmi paprsky, které skáčou
+ * po krocích — proto `steps(8)` a ne plynulá rotace. Plynulá rotace vypadá
+ * jako web, skoková jako systém.
+ */
+@keyframes vos-spoke-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@utility vos-spinner {
+  animation: vos-spoke-spin 0.8s steps(8, end) infinite;
+}
+
+/* Neurčitý průběh — délka není známá, proužek jen putuje. */
+@keyframes vos-indeterminate {
+  0% {
+    left: -35%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Dělicí čára. Vodorovná je výchozí, svislá přes `vos-separator-y`. */
+@utility vos-separator {
+  border: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--separator);
+}
+
+@utility vos-separator-y {
+  border: 0;
+  width: 1px;
+  align-self: stretch;
+  background-color: var(--separator);
+}
+
+/*
  * Scéna pod sklem. Panel má rozostření 100px, takže by se přes něj pozadí
  * <body> rozmazalo do jednolité plochy a sklo tlačítka by nemělo co lomit.
  * Náhled si proto scénu kreslí znovu, ostře. `fixed` ji drží spojitou přes

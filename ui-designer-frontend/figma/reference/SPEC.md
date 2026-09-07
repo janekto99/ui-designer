@@ -83,6 +83,39 @@ Recessed            INNER_SHADOW     y1.5   blur4  rgba(0,0,0,.10)  overlay .08
 Ovládací prvky mají menší rozostření než okna — 100px je pro panel, ne pro
 tlačítko. Hodnota pro tlačítko není v datech, používá se 24px.
 
+### Škála podkladů _(odečteno ze snímku)_
+
+Snímek `Materials` má vzorky na šachovnici průhlednosti, takže se z pixelů dá
+spočítat, o kolik každý materiál posouvá podklad. Pozadí panelu je
+`(82.5, 108, 143)`; pro každý vzorek se vzal průměr dvou dominantních tónů
+a rozdíl se převedl na krytí čistě bílé nebo černé:
+
+| Materiál | Barva vzorku | Posun | Ekvivalent |
+| --- | --- | --- | --- |
+| Thin | (102, 128, 162) | +19 | bílá 14 % |
+| Regular | (62, 88, 122) | −20,5 | černá 19 % |
+| Thick | (50, 76, 112) | −32 | černá 30 % |
+| Recessed | (53, 78, 114) | −29,5 | černá 28 % |
+| Windows / Glass | (90, 114, 149) | +6,5 | bílá 5 % |
+| Separator | (102, 128, 164) | +20,5 | bílá 15 % |
+
+Dvě věci, které z toho plynou a nejsou zřejmé:
+
+- **Recessed a Thick mají skoro stejnou výplň.** Recessed není tmavší
+  materiál — je to Thick s vnitřním stínem. Rozdíl dělá stín, ne barva.
+- **Hover je slabší než Idle** (bílá 7 % proti 16 %). Není to náhradní výplň,
+  ale přísvit, který se přičítá *přes* idle. Proto se v kódu dělá překryvem,
+  ne přepsáním barvy.
+
+**Meze téhle metody.** Šachovnice má kontrast jen 3–4 úrovně, takže z ní
+nejde oddělit krytí od barvy překryvu — čísla výš předpokládají čistě bílý
+nebo černý překryv. Naměřené posuny jsou po kanálech konstantní, což
+alfa-kompozice nedává; skutečný překryv je nejspíš mírně tónovaný. Pořadí
+a vzájemný poměr materiálů ale změřené jsou, a to je to podstatné.
+
+Cross-check proti `.fig`: poměr Idle : Pinch vyšel z pixelů 16 : 37, z dat
+stylů 1 : 2,2. Sedí.
+
 ---
 
 ## Typografie _(z Figmy)_
@@ -160,7 +193,10 @@ App Icon · Cover · Getting Started · License · Change log
 
 ## Snímky obrazovky
 
-Do téhle složky patří i snímky z Figmy. **Zapsat je z konverzace na disk
-neumím** — k jejich datům nemám přístup, takže je sem musíš uložit sám.
-Nabízí se pojmenování podle stránky: `colors.png`, `materials.png`,
-`text-styles.png`, `buttons.png`, `lists.png`, `menus.png`.
+Leží v [`pictures/apple/`](../../pictures/apple) — 28 souborů, jeden na stránku
+kitu. Jsou to **jediný zdroj pravdy pro druhou fázi**; `.fig` se už znovu
+nerozbaluje.
+
+Hodnoty ze škály podkladů výš jsou z nich vytěžené programově, ne odhadem:
+šachovnice průhlednosti dovolí spočítat, o kolik každý materiál posouvá
+podklad. Postup je popsaný u tabulky.

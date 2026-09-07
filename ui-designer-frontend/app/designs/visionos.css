@@ -84,6 +84,38 @@
     inset 0 1.5px 4px rgb(0 0 0 / 0.1),
     inset 0 -0.5px 1px rgb(255 255 255 / 0.5);
 
+  /* Škála podkladů. Ve světlém režimu materiál prosvětluje, v tmavém ztmavuje. */
+  --view-thin: rgb(255 255 255 / 0.4);
+  --view-regular: rgb(255 255 255 / 0.58);
+  --view-thick: rgb(255 255 255 / 0.74);
+  --view-recessed: rgb(0 0 0 / 0.06);
+  --view-blur: 40px;
+
+  --separator: rgb(0 0 0 / 0.12);
+
+  /* Vstupní pole jsou vyhloubená — tmavší než plocha, na které leží. */
+  --field-fill: rgb(0 0 0 / 0.06);
+  --field-fill-hover: rgb(0 0 0 / 0.09);
+  --field-fill-focus: rgb(0 0 0 / 0.12);
+  --field-placeholder: rgb(0 0 0 / 0.4);
+
+  /* Přepínač: dráha vypnutá / zapnutá a knoflík. */
+  --track-off: rgb(0 0 0 / 0.14);
+  --track-on: var(--vos-green);
+  --knob: #ffffff;
+
+  /* Zaškrtávátko je ve visionOS kruh, ne čtverec. */
+  --check-fill: var(--vos-blue);
+  --check-mark: #ffffff;
+
+  /* Posuvník a ukazatel průběhu sdílí dráhu i výplň. */
+  --slider-track: rgb(0 0 0 / 0.12);
+  --slider-fill: rgb(0 0 0 / 0.55);
+
+  /* Odznáček je vždy systémová červená, v obou režimech. */
+  --badge-fill: var(--vos-red);
+  --badge-fg: #ffffff;
+
   --focus-ring: rgb(0 0 0 / 0.45);
 
   /* Scéna pod sklem. Až budeš chtít fotku, stačí přepsat tuhle proměnnou:
@@ -159,6 +191,34 @@
   --recessed-shadow:
     inset 0 1.5px 4px rgb(0 0 0 / 0.35),
     inset 0 -0.5px 1px rgb(255 255 255 / 0.25);
+
+  /* Odečteno ze snímku `Materials` — postup je popsaný v SPEC.md.
+     Recessed a Thick mají skoro stejnou výplň, liší se vnitřním stínem. */
+  --view-thin: rgb(255 255 255 / 0.14);
+  --view-regular: rgb(0 0 0 / 0.19);
+  --view-thick: rgb(0 0 0 / 0.3);
+  --view-recessed: rgb(0 0 0 / 0.28);
+  --view-blur: 40px;
+
+  --separator: rgb(255 255 255 / 0.15);
+
+  --field-fill: rgb(0 0 0 / 0.22);
+  --field-fill-hover: rgb(0 0 0 / 0.28);
+  --field-fill-focus: rgb(0 0 0 / 0.34);
+  --field-placeholder: rgb(255 255 255 / 0.45);
+
+  --track-off: rgb(255 255 255 / 0.12);
+  --track-on: var(--vos-green);
+  --knob: #ffffff;
+
+  --check-fill: var(--vos-blue);
+  --check-mark: #ffffff;
+
+  --slider-track: rgb(255 255 255 / 0.12);
+  --slider-fill: rgb(255 255 255 / 0.8);
+
+  --badge-fill: var(--vos-red);
+  --badge-fg: #ffffff;
 
   --focus-ring: rgb(255 255 255 / 0.55);
 
