@@ -27,6 +27,12 @@ export const designs: Design[] = [
     tagline: 'Inkoustová tlačítka, pilulky, chladně šedé pozadí.',
   },
   {
+    id: 'sport',
+    name: 'Sport',
+    className: 'design-sport',
+    tagline: 'Sklo na chrome, vrstvení na obsahu. Paleta nového projektu.',
+  },
+  {
     id: 'linka',
     name: 'Linka',
     className: 'design-linka',

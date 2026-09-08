@@ -14,10 +14,12 @@ const paths: Record<string, string> = {
   catalog: '/',
   showcase: '/showcase',
   playground: '/playground',
+  test: '/test',
 }
 
 const area = computed({
   get: () => {
+    if (route.path.startsWith('/test')) return 'test'
     if (route.path.startsWith('/playground')) return 'playground'
     if (route.path.startsWith('/showcase')) return 'showcase'
     return 'catalog'
@@ -31,6 +33,7 @@ const areas = [
   { label: 'Komponenty', value: 'catalog', icon: 'lucide:component' },
   { label: 'Ukázky', value: 'showcase', icon: 'lucide:layout-dashboard' },
   { label: 'Playground', value: 'playground', icon: 'lucide:flask-conical' },
+  { label: 'Test', value: 'test', icon: 'lucide:play' },
 ]
 </script>
 

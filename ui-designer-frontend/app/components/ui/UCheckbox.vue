@@ -16,6 +16,8 @@ const props = withDefaults(
 
 const model = defineModel<boolean>({ default: false })
 
+const id = useId()
+
 const ui = computed(() => checkbox({ size: props.size, checked: model.value }))
 
 function toggleValue() {
@@ -32,6 +34,7 @@ function toggleValue() {
       type="button"
       role="checkbox"
       :aria-checked="model"
+      :aria-labelledby="label ? `${id}-label` : undefined"
       :aria-label="label ? undefined : ariaLabel"
       :disabled="disabled"
       :class="cn(ui.box(), props.class)"
@@ -39,8 +42,16 @@ function toggleValue() {
     >
       <Icon v-show="model" name="lucide:check" :class="ui.mark()" />
     </button>
-    <span v-if="label" class="text-callout" :class="disabled && 'text-(--fg-disabled)'">
-      {{ label }}
-    </span>
+    <!--
+      `aria-labelledby`, ne obalující `<label>`: ten označuje formulářové
+      prvky, ne `<button role="checkbox">`. Bez toho by čtečka přečetla
+      „zaškrtávátko" a nic víc.
+    -->
+    <span
+      v-if="label"
+      :id="`${id}-label`"
+      class="text-callout"
+      :class="disabled && 'text-(--fg-disabled)'"
+    >{{ label }}</span>
   </label>
 </template>
