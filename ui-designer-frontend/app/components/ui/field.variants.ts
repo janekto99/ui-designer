@@ -10,7 +10,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const field = tv({
   slots: {
     root: [
-      'relative flex w-full items-center rounded-full',
+      'relative flex w-full items-center rounded-control',
       'bg-(--field-fill) transition-colors duration-150',
       'shadow-(--recessed-shadow)',
       'hover:bg-(--field-fill-hover)',

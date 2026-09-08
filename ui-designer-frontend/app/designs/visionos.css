@@ -177,8 +177,12 @@
     linear-gradient(165deg, #a9c9e9 0%, #e2eaf3 45%, #b6c5cf 100%);
 }
 
-/* ------------------------------------------------------------------ tmavý */
+/* ------------------------------------------------------------------ tmavý
+ * Dvě selektory, aby design šel pověsit i na vnořený prvek — playground
+ * ukazuje tři návrhy vedle sebe na jedné stránce a `dark` zůstává na <html>.
+ */
 
+.dark .design-visionos,
 .design-visionos.dark {
   color-scheme: dark;
 

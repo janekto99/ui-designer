@@ -15,7 +15,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const button = tv({
   slots: {
     base: [
-      'vos-surface inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full font-medium',
+      'vos-surface inline-flex shrink-0 cursor-pointer items-center justify-center rounded-control font-medium',
       'outline-none select-none',
       'focus-visible:ring-2 focus-visible:ring-(--focus-ring) focus-visible:ring-offset-0',
       'disabled:cursor-not-allowed',

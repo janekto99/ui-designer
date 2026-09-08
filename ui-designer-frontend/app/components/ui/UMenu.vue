@@ -75,7 +75,7 @@ function onKeydown(event: KeyboardEvent) {
     role="menu"
     :aria-label="ariaLabel"
     :class="cn(
-      'vos-view-regular w-64 rounded-2xl p-1.5 shadow-(--panel-shadow)',
+      'vos-view-regular w-64 rounded-surface p-1.5 shadow-(--panel-shadow)',
       props.class,
     )"
     @keydown="onKeydown"

@@ -7,7 +7,7 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const select = tv({
   slots: {
     trigger: [
-      'vos-surface inline-flex cursor-pointer items-center justify-between rounded-full font-medium',
+      'vos-surface inline-flex cursor-pointer items-center justify-between rounded-control font-medium',
       'outline-none select-none',
       'focus-visible:ring-2 focus-visible:ring-(--focus-ring)',
       'disabled:cursor-not-allowed',
@@ -15,7 +15,7 @@ export const select = tv({
     value: 'truncate',
     chevron: 'shrink-0 transition-transform duration-200',
     panel: [
-      'vos-view-regular absolute z-50 max-h-72 overflow-y-auto rounded-2xl p-1.5',
+      'vos-view-regular absolute z-50 max-h-72 overflow-y-auto rounded-surface p-1.5',
       'shadow-(--panel-shadow)',
     ],
     option: [

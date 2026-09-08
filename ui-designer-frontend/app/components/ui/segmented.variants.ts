@@ -8,11 +8,11 @@ import { tv, type VariantProps } from 'tailwind-variants'
 export const segmented = tv({
   slots: {
     track: [
-      'vos-surface vos-glass inline-flex items-center rounded-full',
+      'vos-surface vos-glass inline-flex items-center rounded-control',
       'has-disabled:pointer-events-none has-disabled:opacity-40',
     ],
     segment: [
-      'vos-surface relative flex-1 cursor-pointer rounded-full text-center font-medium whitespace-nowrap',
+      'vos-surface relative flex-1 cursor-pointer rounded-control text-center font-medium whitespace-nowrap',
       'outline-none transition-colors duration-200',
       'focus-visible:ring-2 focus-visible:ring-(--focus-ring)',
     ],

@@ -1,0 +1,102 @@
+/*
+ * Návrh 2 — MŘÍŽKA
+ *
+ * Jeden panel, sloupce drží.
+ *
+ * Původní obrazovka opakuje hlavičku RANK · CH · KURZ · … u **každého** zápasu.
+ * Osmkrát pod sebou totéž. Oko pak nemá svislou linku, které by se drželo,
+ * a sloupce se rozpadnou na osm nezávislých tabulek — proto to působí slitě,
+ * i když každá karta zvlášť je v pořádku.
+ *
+ * Tenhle návrh dá turnaji jeden panel a hlavičku **jednou**, nahoře, přilepenou
+ * při rolování. Zápasy jsou řádky uvnitř, oddělené vlasovou čárou. Svislé
+ * linky mezi sloupci jsou tlumené, ale jsou.
+ *
+ * Tmavý režim je výchozí, ne přepínač — tak to mají Linear i Vercel a na
+ * číslech to funguje: menší jas okolo, víc rozdílu na hodnotách.
+ *
+ * Z Apple si bere odstupňování ploch (stránka → panel) a jednu světlou hranu
+ * nahoře. Zahazuje zaoblení větší než 8 px a jakoukoli hloubku pod panelem.
+ */
+
+.design-mrizka {
+  color-scheme: light;
+
+  --radius-control: 6px;
+  --radius-surface: 8px;
+  --radius-chip: 3px;
+
+  --fg-primary: #14161a;
+  --fg-secondary: #565b68;
+  --fg-tertiary: #868b98;
+
+  --platter-tint: #eef0f3;
+  --platter-tint-active: #e2e5ea;
+
+  --panel-tint: #ffffff;
+  --panel-shadow: 0 0 0 1px #e3e6ec;
+
+  --view-thin: #f7f8fa;
+  --view-regular: #ffffff;
+  --view-thick: #ffffff;
+  --view-recessed: #f2f4f7;
+
+  --separator: #e6e9ef;
+
+  --field-fill: #ffffff;
+  --field-fill-hover: #f8f9fb;
+
+  --tone-accent: #0b6bcb;
+  --tone-accent-strong: #08529c;
+  --tone-accent-surface: #e7f1fc;
+  --tone-accent-solid: #08529c;
+
+  --focus-ring: #0b6bcb;
+  --preview-backdrop: #f2f4f7;
+}
+
+.dark .design-mrizka,
+.design-mrizka.dark {
+  color-scheme: dark;
+
+  --fg-primary: #e8eaee;
+  --fg-secondary: #969cab;
+  --fg-tertiary: #676d7c;
+
+  --platter-tint: #1b1e25;
+  --platter-tint-active: #242832;
+
+  /* Panel se od stránky liší o jeden krok jasu a obrysem, ne stínem.
+     Stín v tmavém rozhraní nefunguje — není kam padat. */
+  --panel-tint: #121419;
+  --panel-shadow: 0 0 0 1px #242832;
+
+  --view-thin: #0d0f13;
+  --view-regular: #121419;
+  --view-thick: #171a20;
+  --view-recessed: #0a0b0e;
+
+  --separator: #21252d;
+
+  --field-fill: #0d0f13;
+  --field-fill-hover: #12141a;
+  --field-fill-focus: #12141a;
+
+  --tone-accent: #58a6ff;
+  --tone-accent-strong: #8ec2ff;
+  --tone-accent-surface: #10233c;
+  --tone-accent-solid: #2f7fe0;
+
+  --tone-success: #3fb950;
+  --tone-success-strong: #56d364;
+  --tone-success-surface: #0f2418;
+
+  --tone-danger: #f85149;
+  --tone-danger-strong: #ff8078;
+  --tone-danger-surface: #2a1416;
+
+  --focus-ring: #58a6ff;
+  /* O chlup do modra proti Lince. Dva návrhy se stejným pozadím se v tmavém
+     režimu na první pohled nerozliší a porovnání pak nic neřekne. */
+  --preview-backdrop: #0c0f15;
+}

@@ -1,0 +1,102 @@
+/*
+ * Návrh 3 — KARTA
+ *
+ * Míň jednotek, víc hierarchie.
+ *
+ * Původní obrazovka ukazuje osm zápasů a u každého sedm čísel. To je 112 čísel
+ * na jednu obrazovku, všechna stejně velká. Slitost tady nedělá barva ani
+ * rámeček, ale to, že nic není důležitější než nic jiného.
+ *
+ * Tenhle návrh karty ponechá, ale zvětší je a většinu čísel schová. Na kartě
+ * zůstane to, kvůli čemu se na ni člověk dívá: kdo hraje a jaký je kurz.
+ * Zbytek je jeden řádek a rozklad až po rozbalení.
+ *
+ * Z Apple si bere pilulky, štědré odsazení a jednu měkkou vrstvu stínu.
+ * Zahazuje sklo a rozostření — karta má být plocha, ne okno.
+ */
+
+.design-karta {
+  color-scheme: light;
+
+  --radius-control: 999px;
+  --radius-surface: 20px;
+  --radius-chip: 8px;
+
+  --fg-primary: #1b1a19;
+  --fg-secondary: #6b6763;
+  --fg-tertiary: #9b968f;
+
+  --platter-tint: #f3f0ec;
+  --platter-tint-active: #e8e3dc;
+
+  --panel-tint: #fffdfb;
+  --panel-shadow: 0 1px 2px rgb(60 50 40 / 0.05), 0 8px 24px rgb(60 50 40 / 0.06);
+
+  --view-thin: #fbf9f6;
+  --view-regular: #fffdfb;
+  --view-thick: #ffffff;
+  --view-recessed: #f3f0ec;
+
+  --separator: #ebe6df;
+
+  --field-fill: #ffffff;
+  --field-fill-hover: #fbf9f6;
+  --field-fill-focus: #ffffff;
+
+  /* Teplá zelená místo modré. Sportovní data jsou o výsledku, ne o softwaru. */
+  --tone-accent: #1f7a5a;
+  --tone-accent-strong: #166247;
+  --tone-accent-surface: #e6f3ee;
+  --tone-accent-solid: #166247;
+
+  --tone-warning: #a35b12;
+  --tone-warning-strong: #86490c;
+  --tone-warning-surface: #fbf0e2;
+  --tone-warning-solid: #86490c;
+
+  --tone-neutral-surface: #f3f0ec;
+
+  --focus-ring: #1f7a5a;
+  --preview-backdrop: #f6f3ef;
+}
+
+.dark .design-karta,
+.design-karta.dark {
+  color-scheme: dark;
+
+  --fg-primary: #f5f2ee;
+  --fg-secondary: #a29c94;
+  --fg-tertiary: #78736c;
+
+  --platter-tint: #232120;
+  --platter-tint-active: #2e2b29;
+
+  --panel-tint: #1a1918;
+  --panel-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 10px 30px rgb(0 0 0 / 0.35);
+
+  --view-thin: #141312;
+  --view-regular: #1a1918;
+  --view-thick: #201e1d;
+  --view-recessed: #0f0e0e;
+
+  --separator: #2b2827;
+
+  --field-fill: #141312;
+  --field-fill-hover: #1a1918;
+  --field-fill-focus: #1a1918;
+
+  --tone-accent: #4cc79b;
+  --tone-accent-strong: #7ddcba;
+  --tone-accent-surface: #12281f;
+  --tone-accent-solid: #2b9b74;
+
+  --tone-warning: #e0a35c;
+  --tone-warning-strong: #f0c28c;
+  --tone-warning-surface: #2c2113;
+  --tone-warning-solid: #b8762a;
+
+  --tone-neutral-surface: #232120;
+
+  --focus-ring: #4cc79b;
+  --preview-backdrop: #100f0f;
+}

@@ -1,0 +1,199 @@
+/*
+ * Výchozí hodnoty, ze kterých vycházejí všechny designy.
+ *
+ * Sedí na `:root`, takže je každý design přebije už jednou třídou. Díky tomu
+ * se v souboru designu píše jen to, **čím se liší** — a rozdíl je pak vidět
+ * na první pohled, což je u návrhu k rozhodnutí důležitější než úplnost.
+ *
+ * Základ je záměrně plochý a tichý: žádné rozostření, žádný odlesk, jeden
+ * stín. Sklo je odchylka, kterou si musí design vyžádat, ne výchozí stav.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Text */
+  --fg-primary: #16181d;
+  --fg-secondary: #5b6070;
+  --fg-tertiary: #8b90a0;
+  --fg-disabled: #b3b7c2;
+  --fg-on-selected: #ffffff;
+
+  /* Ovládací prvky */
+  --platter-tint: #f2f3f6;
+  --platter-veil: transparent;
+  --platter-tint-active: #e6e8ee;
+  --platter-veil-active: transparent;
+  --platter-tint-disabled: #f6f7f9;
+  --platter-veil-disabled: transparent;
+
+  --selected-bg: #16181d;
+  --selected-bg-hover: #24272f;
+  --selected-bg-active: #34384250;
+
+  /* Obrys. V plochém designu to není odlesk, ale obyčejná vlasová čára —
+     `vos-surface` ho vykresluje pořád stejně, jen dostane jinou náplň. */
+  --specular-gradient: linear-gradient(var(--separator), var(--separator));
+  --hover-glow: none;
+
+  --control-blur: 0px;
+  --control-shadow: none;
+  --control-shadow-active: none;
+
+  /* Plochy */
+  --panel-tint: #ffffff;
+  --panel-veil: transparent;
+  --panel-blur: 0px;
+  --panel-shadow: 0 1px 2px rgb(16 18 29 / 0.06);
+
+  --recessed-shadow: none;
+
+  --view-thin: #fafbfc;
+  --view-regular: #ffffff;
+  --view-thick: #ffffff;
+  --view-recessed: #f4f5f8;
+  --view-blur: 0px;
+
+  --separator: #e6e8ee;
+
+  /* Vstupní pole */
+  --field-fill: #ffffff;
+  --field-fill-hover: #fafbfc;
+  --field-fill-focus: #ffffff;
+  --field-placeholder: #9aa0ae;
+
+  /* Přepínače a zaškrtávátka */
+  --track-off: #d5d8e0;
+  --track-on: var(--tone-success-solid);
+  --knob: #ffffff;
+  --check-fill: var(--tone-accent-solid);
+  --check-mark: #ffffff;
+
+  --slider-track: #e2e4ea;
+  --slider-fill: #16181d;
+
+  --badge-fill: var(--tone-danger-solid);
+  --badge-fg: #ffffff;
+
+  /* Systémová paleta — základ bere iOS hodnoty, designy si je přebarvují. */
+  --vos-red: #ff3b30;
+  --vos-orange: #ff9500;
+  --vos-yellow: #ffcc00;
+  --vos-green: #34c759;
+  --vos-mint: #00c7be;
+  --vos-teal: #30b0c7;
+  --vos-cyan: #32ade6;
+  --vos-blue: #0091ff;
+  --vos-indigo: #5856d6;
+  --vos-purple: #af52de;
+  --vos-pink: #ff2d55;
+  --vos-brown: #a2845e;
+  --vos-gray: #8e8e93;
+
+  /* Sémantické tóny */
+  --tone-accent: #2563eb;
+  --tone-accent-strong: #1d4ed8;
+  --tone-accent-surface: #eaf0ff;
+  --tone-accent-solid: #1d4ed8;
+
+  --tone-success: #059669;
+  --tone-success-strong: #047857;
+  --tone-success-surface: #e7f6f0;
+  --tone-success-solid: #047857;
+
+  --tone-warning: #b45309;
+  --tone-warning-strong: #92400e;
+  --tone-warning-surface: #fdf1e3;
+  --tone-warning-solid: #92400e;
+
+  --tone-danger: #dc2626;
+  --tone-danger-strong: #b91c1c;
+  --tone-danger-surface: #fdecec;
+  --tone-danger-solid: #b91c1c;
+
+  --tone-info: #0e7490;
+  --tone-info-strong: #155e75;
+  --tone-info-surface: #e5f4f8;
+  --tone-info-solid: #155e75;
+
+  --tone-neutral: var(--fg-secondary);
+  --tone-neutral-strong: var(--fg-primary);
+  --tone-neutral-surface: #f0f1f5;
+  --tone-neutral-solid: #16181d;
+  --tone-solid-fg: #ffffff;
+
+  --focus-ring: #2563eb;
+
+  /* Pozadí stránky. Plochá barva, ne scéna. */
+  --preview-backdrop: #f7f8fa;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --fg-primary: #f4f5f7;
+  --fg-secondary: #a0a5b3;
+  --fg-tertiary: #71768a;
+  --fg-disabled: #4d5262;
+  --fg-on-selected: #0b0b0d;
+
+  --platter-tint: #1c1e26;
+  --platter-tint-active: #262932;
+  --platter-tint-disabled: #16171d;
+
+  --selected-bg: #f4f5f7;
+  --selected-bg-hover: #e3e5ea;
+  --selected-bg-active: #d2d5dd;
+
+  --panel-tint: #14151b;
+  --panel-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+
+  --view-thin: #101116;
+  --view-regular: #14151b;
+  --view-thick: #181a21;
+  --view-recessed: #0b0c10;
+
+  --separator: #262932;
+
+  --field-fill: #101116;
+  --field-fill-hover: #14151b;
+  --field-fill-focus: #14151b;
+  --field-placeholder: #6b7080;
+
+  --track-off: #32363f;
+  --slider-track: #2a2d36;
+  --slider-fill: #f4f5f7;
+
+  --tone-accent: #60a5fa;
+  --tone-accent-strong: #93c5fd;
+  --tone-accent-surface: #1c2a44;
+  --tone-accent-solid: #3b82f6;
+
+  --tone-success: #34d399;
+  --tone-success-strong: #6ee7b7;
+  --tone-success-surface: #10291f;
+  --tone-success-solid: #10b981;
+
+  --tone-warning: #fbbf24;
+  --tone-warning-strong: #fcd34d;
+  --tone-warning-surface: #2e2210;
+  --tone-warning-solid: #f59e0b;
+
+  --tone-danger: #f87171;
+  --tone-danger-strong: #fca5a5;
+  --tone-danger-surface: #2e1517;
+  --tone-danger-solid: #ef4444;
+
+  --tone-info: #38bdf8;
+  --tone-info-strong: #7dd3fc;
+  --tone-info-surface: #10262f;
+  --tone-info-solid: #0ea5e9;
+
+  --tone-neutral-surface: #1c1e26;
+  --tone-neutral-solid: #f4f5f7;
+  --tone-solid-fg: #0b0b0d;
+
+  --focus-ring: #60a5fa;
+
+  --preview-backdrop: #0a0b0e;
+}

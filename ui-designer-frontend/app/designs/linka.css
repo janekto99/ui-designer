@@ -1,0 +1,94 @@
+/*
+ * Návrh 1 — LINKA
+ *
+ * Hustota z typografie, ne z rámečků.
+ *
+ * Původní obrazovka má osm bílých karet na skoro bílém pozadí. Karta od karty
+ * se liší o pár procent jasu, takže se slijí do jedné šedé plochy — to je ten
+ * pocit „slitosti". Tenhle návrh karty ruší úplně: řádky drží pohromadě
+ * vlasová čára a rytmus, ne obrys.
+ *
+ * Z Apple si bere typografickou škálu, tabulkové číslice a zdrženlivost.
+ * Zahazuje sklo, rozostření a stíny — na datech nedělají nic než šum.
+ *
+ * Barva má jediný úkol: říct, která hodnota je lepší. Všechno ostatní je
+ * stupeň šedi. Původní obrazovka barví červeně každý rozdíl, takže červená
+ * nic neznamená.
+ */
+
+.design-linka {
+  color-scheme: light;
+
+  --radius-control: 8px;
+  --radius-surface: 10px;
+  --radius-chip: 4px;
+
+  --fg-primary: #101114;
+  --fg-secondary: #5c6070;
+  --fg-tertiary: #8a8f9e;
+
+  /* Ovládací prvky nemají výplň, dokud na ně nejde kurzor. */
+  --platter-tint: #f1f2f5;
+  --platter-tint-active: #e4e6eb;
+
+  --panel-tint: #ffffff;
+  --panel-shadow: none;
+
+  /* Neprůhledné. „Bez karet" se řeší strukturou, ne průhledností — jinak
+     prosvítá pozadí katalogu, ve kterém návrh stojí. */
+  --view-thin: #ffffff;
+  --view-regular: #ffffff;
+  --view-thick: #ffffff;
+  --view-recessed: #f6f7f9;
+
+  --separator: #e8eaef;
+
+  --field-fill: #ffffff;
+  --field-fill-hover: #fbfbfd;
+  --field-fill-focus: #ffffff;
+
+  /* Jediný akcent. Modrá se používá na výběr a odkazy, nic víc. */
+  --tone-accent: #2f5fd7;
+  --tone-accent-strong: #1f47ad;
+  --tone-accent-surface: #eef2fd;
+  --tone-accent-solid: #1f47ad;
+
+  --tone-neutral-surface: #f1f2f5;
+
+  --focus-ring: #2f5fd7;
+  --preview-backdrop: #ffffff;
+}
+
+.dark .design-linka,
+.design-linka.dark {
+  color-scheme: dark;
+
+  --fg-primary: #f2f3f5;
+  --fg-secondary: #9ba0ae;
+  --fg-tertiary: #6c7183;
+
+  --platter-tint: #1a1c22;
+  --platter-tint-active: #23262e;
+
+  --panel-tint: #101116;
+  --view-thin: #0d0e12;
+  --view-regular: #101116;
+  --view-thick: #131419;
+  --view-recessed: #0b0c10;
+
+  --separator: #23262e;
+
+  --field-fill: #0e0f13;
+  --field-fill-hover: #131419;
+  --field-fill-focus: #131419;
+
+  --tone-accent: #7aa2f7;
+  --tone-accent-strong: #a4c0fb;
+  --tone-accent-surface: #17203a;
+  --tone-accent-solid: #3f6fe0;
+
+  --tone-neutral-surface: #1a1c22;
+
+  --focus-ring: #7aa2f7;
+  --preview-backdrop: #08080a;
+}

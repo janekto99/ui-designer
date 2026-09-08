@@ -22,8 +22,8 @@ const props = withDefaults(
 defineEmits<{ remove: [] }>()
 
 const sizes = {
-  sm: 'h-8 gap-1.5 rounded-xl px-3 text-footnote',
-  md: 'h-11 gap-2 rounded-2xl px-4 text-body',
+  sm: 'h-8 gap-1.5 rounded-chip px-3 text-footnote',
+  md: 'h-11 gap-2 rounded-chip px-4 text-body',
 } as const
 </script>
 

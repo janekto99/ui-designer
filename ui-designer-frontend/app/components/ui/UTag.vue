@@ -35,8 +35,8 @@ const toneClasses = {
 } as const
 
 const sizes = {
-  sm: { root: 'h-5 gap-1 rounded-md px-1.5 text-caption-2', icon: 'size-3' },
-  md: { root: 'h-7 gap-1.5 rounded-lg px-2.5 text-caption-1', icon: 'size-3.5' },
+  sm: { root: 'h-5 gap-1 rounded-chip px-1.5 text-caption-2', icon: 'size-3' },
+  md: { root: 'h-7 gap-1.5 rounded-chip px-2.5 text-caption-1', icon: 'size-3.5' },
 } as const
 </script>
 

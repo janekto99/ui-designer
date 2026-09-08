@@ -1,0 +1,261 @@
+/*
+ * Design: Pastel
+ *
+ * Vytěženo z `pictures/design2` — mobilní aplikace na vstupenky. Barvy jsou
+ * odečtené z pixelů, ne odhadnuté: pozadí `#DFE4EC`, karta `#F7F8FA`,
+ * inkoust `#050624`, akcent `#7587F1`, máta `#A4F3CA`, růžová `#EEB8E2`.
+ *
+ * NEJDŮLEŽITĚJŠÍ RYS: hlavní akce je inkoust, ne akcent.
+ *
+ * „Continue", „Follow", „Add to Calendar" — všechno skoro černé pilulky.
+ * Akcent slouží jen na výběr, odkazy a barevné podložky. Je to obráceně, než
+ * to dělá většina systémů, a je to důvod, proč ta předloha působí klidně:
+ * křičí jedna věc, ne pět. Proto `--tone-neutral-solid` je inkoust a barevná
+ * tlačítka jsou výjimka, ne pravidlo.
+ *
+ * Ostatní rysy: všechno je pilulka, žádné obrysy, skoro žádný stín, pole
+ * nejsou vyhloubená.
+ *
+ * Tmavý režim v předloze NENÍ — všech pět obrázků je světlých. Je odvozený
+ * a drží se stejné logiky: v tmavém se plné výplně rozsvítí a text na nich
+ * ztmavne, protože bílá na sytém odstínu neprojde kontrastem.
+ */
+
+/* ---------------------------------------------------------------- světlý */
+
+.design-pastel {
+  color-scheme: light;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Všechno je pilulka. U visionOS je štítek obdélník, tady kapsle —
+     tvar je tu poznávací znamení, ne detail. */
+  --radius-control: 999px;
+  --radius-surface: 24px;
+  --radius-chip: 999px;
+
+  /* Kategoriální barvy z předlohy. Rozlišují druh události, ne úspěch
+     a chybu — do sémantických tónů se proto nezatáhly. Růžová jako
+     „nebezpečí" by byla lež. */
+  --accent-mint: #a4f3ca;
+  --accent-pink: #eeb8e2;
+
+  --fg-primary: #050624;
+  --fg-secondary: #5b617a;
+  /*
+   * Terciární je tmavší, než by se podle předlohy chtělo. Nese totiž
+   * informaci — počty ve stromu, chybějící hodnoty v tabulce, zástupný text —
+   * a musí projít WCAG AA. Světlejší odstín z předlohy měl 2,9 : 1.
+   *
+   * Daň za to je stlačená škála: sekundární a terciární jsou si blíž, než
+   * je hezké. Tři úrovně textu, které všechny projdou 4,5 : 1, se na světlém
+   * podkladu jinak poskládat nedají.
+   */
+  --fg-tertiary: #656b7f;
+  --fg-disabled: #b4b9c9;
+  --fg-on-selected: #ffffff;
+
+  /* Sklo tu není. `platter` je prostě světle šedá výplň. */
+  --platter-tint: #edeff4;
+  --platter-veil: transparent;
+  --platter-tint-active: #e2e5ec;
+  --platter-veil-active: transparent;
+  --platter-tint-disabled: #f2f3f7;
+  --platter-veil-disabled: transparent;
+
+  /* Vybraný stav je inkoust s bílým textem — u visionOS je to naopak. */
+  --selected-bg: #050624;
+  --selected-bg-hover: #14162f;
+  --selected-bg-active: #23253d;
+
+  /* Žádné obrysy. Plochy se dělí výplní a mezerou, ne linkou. */
+  --specular-gradient: linear-gradient(transparent, transparent);
+  --hover-glow: none;
+
+  --control-blur: 0px;
+  --control-shadow: none;
+  --control-shadow-active: none;
+
+  --panel-tint: #ffffff;
+  --panel-veil: transparent;
+  --panel-blur: 0px;
+  --panel-shadow: 0 1px 2px rgb(10 15 40 / 0.04), 0 8px 24px rgb(10 15 40 / 0.05);
+
+  /* Pole nejsou vyhloubená — jen světlejší plocha. */
+  --recessed-shadow: none;
+
+  --view-thin: #f7f8fa;
+  --view-regular: #ffffff;
+  --view-thick: #ffffff;
+  --view-recessed: #eceef3;
+  --view-blur: 0px;
+
+  --separator: #e7e9f0;
+
+  /* Zaostřené pole se v předloze zesvětlí do bílé, ne ztmaví. */
+  --field-fill: #f1f2f6;
+  --field-fill-hover: #eceef3;
+  --field-fill-focus: #ffffff;
+  --field-placeholder: #656b7f;
+
+  --track-off: #d7dae4;
+  --track-on: #7587f1;
+  --knob: #ffffff;
+
+  --check-fill: #7587f1;
+  --check-mark: #ffffff;
+
+  --slider-track: #e2e5ec;
+  --slider-fill: #050624;
+
+  --badge-fill: #e5484d;
+  --badge-fg: #ffffff;
+
+  /* Paleta. Některé komponenty na ni sahají přímo — zbytek z doby, kdy byl
+     jediný design visionOS. Proto ji Pastel musí definovat taky. */
+  --vos-red: #e5484d;
+  --vos-orange: #f59e0b;
+  --vos-yellow: #facc15;
+  --vos-green: #34c77b;
+  --vos-mint: #a4f3ca;
+  --vos-teal: #2dd4bf;
+  --vos-cyan: #38bdf8;
+  --vos-blue: #7587f1;
+  --vos-indigo: #6366f1;
+  --vos-purple: #a855f7;
+  --vos-pink: #eeb8e2;
+  --vos-brown: #a3856b;
+  --vos-gray: #8a90a6;
+
+  /*
+   * Sémantické tóny. `--tone-*` je barva samotná, `-strong` odstín s dost
+   * kontrastem na měkké výplni, `-solid` plná výplň tlačítka.
+   *
+   * Akcent `#7587F1` se jako plná výplň použít nedá: bílá na něm má 3,2 : 1
+   * a na WCAG AA to nestačí. Proto je `-solid` hlubší.
+   */
+  --tone-accent: #7587f1;
+  --tone-accent-strong: #4a57c9;
+  --tone-accent-surface: #e9ecfe;
+  --tone-accent-solid: #4c5ad8;
+
+  --tone-success: #34c77b;
+  --tone-success-strong: #0e7a52;
+  --tone-success-surface: #e2f6ec;
+  --tone-success-solid: #0a6b47;
+
+  --tone-warning: #f59e0b;
+  --tone-warning-strong: #92400e;
+  --tone-warning-surface: #fdf0e1;
+  --tone-warning-solid: #8a3d0b;
+
+  --tone-danger: #e5484d;
+  --tone-danger-strong: #c22026;
+  --tone-danger-surface: #fdecec;
+  --tone-danger-solid: #b31d22;
+
+  --tone-info: #38bdf8;
+  --tone-info-strong: #0e6f90;
+  --tone-info-surface: #e4f4fb;
+  --tone-info-solid: #0b5f7c;
+
+  /* Neutrální plná výplň je inkoust — hlavní akce celého designu. */
+  --tone-neutral: var(--fg-secondary);
+  --tone-neutral-strong: var(--fg-primary);
+  --tone-neutral-surface: #edeff4;
+  --tone-neutral-solid: #050624;
+
+  --tone-solid-fg: #ffffff;
+
+  --focus-ring: #4c5ad8;
+
+  /* Chladná šedomodrá, ne bílá. Karty se od ní odrážejí bez obrysu. */
+  --preview-backdrop: #dfe4ec;
+}
+
+/* ------------------------------------------------------------------ tmavý
+ * Odvozený — předloha tmavý režim nemá. Drží se logiky visionOS: plné výplně
+ * se rozsvítí a text na nich ztmavne. Bílá na sytém odstínu by neprošla.
+ */
+
+.dark .design-pastel,
+.design-pastel.dark {
+  color-scheme: dark;
+
+  --fg-primary: #f2f3f8;
+  --fg-secondary: #a0a6bf;
+  --fg-tertiary: #848ba6;
+  --fg-disabled: #4e5470;
+  --fg-on-selected: #0e1020;
+
+  --platter-tint: #232842;
+  --platter-tint-active: #2e3450;
+  --platter-tint-disabled: #1a1d30;
+
+  /* Inkoust je v tmavém režimu světlo — jinak by hlavní akce zmizela. */
+  --selected-bg: #f2f3f8;
+  --selected-bg-hover: #e2e4ee;
+  --selected-bg-active: #ced2e0;
+
+  --panel-tint: #1a1d33;
+  --panel-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 10px 30px rgb(0 0 0 / 0.35);
+
+  --view-thin: #14172a;
+  --view-regular: #1a1d33;
+  --view-thick: #20243c;
+  --view-recessed: #0a0c18;
+
+  --separator: #262b45;
+
+  --field-fill: #14172a;
+  --field-fill-hover: #1a1d33;
+  --field-fill-focus: #1a1d33;
+  --field-placeholder: #848ba6;
+
+  --track-off: #333a57;
+  --track-on: #8b9bff;
+  --check-fill: #8b9bff;
+
+  --slider-track: #2a2f49;
+  --slider-fill: #f2f3f8;
+
+  --vos-blue: #8b9bff;
+  --vos-green: #4ade80;
+  --vos-red: #fb7185;
+  --vos-orange: #fbbf24;
+  --vos-gray: #a0a6bf;
+
+  --tone-accent: #8b9bff;
+  --tone-accent-strong: #a8b4ff;
+  --tone-accent-surface: #1e2445;
+  --tone-accent-solid: #8b9bff;
+
+  --tone-success: #4ade80;
+  --tone-success-strong: #6ee7a8;
+  --tone-success-surface: #12301f;
+  --tone-success-solid: #4ade80;
+
+  --tone-warning: #fbbf24;
+  --tone-warning-strong: #fcd34d;
+  --tone-warning-surface: #2e2411;
+  --tone-warning-solid: #fbbf24;
+
+  --tone-danger: #fb7185;
+  --tone-danger-strong: #fca5a5;
+  --tone-danger-surface: #2e1519;
+  --tone-danger-solid: #fb7185;
+
+  --tone-info: #38bdf8;
+  --tone-info-strong: #7dd3fc;
+  --tone-info-surface: #10262f;
+  --tone-info-solid: #38bdf8;
+
+  --tone-neutral-surface: #232842;
+  --tone-neutral-solid: #f2f3f8;
+
+  --tone-solid-fg: #0e1020;
+
+  --focus-ring: #8b9bff;
+
+  --preview-backdrop: #0a0b14;
+}

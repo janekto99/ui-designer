@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
             :aria-describedby="description ? `${id}-desc` : undefined"
             tabindex="-1"
             :class="cn(
-              'vos-view-thick relative max-h-[85dvh] overflow-y-auto rounded-3xl p-6 shadow-(--panel-shadow)',
+              'vos-view-thick relative max-h-[85dvh] overflow-y-auto rounded-surface p-6 shadow-(--panel-shadow)',
               sizes[props.size],
               props.class,
             )"

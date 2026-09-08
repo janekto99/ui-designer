@@ -5,6 +5,12 @@
  * sloupci a hustá tabulka by vypadala hůř, než jaká je.
  */
 const route = useRoute()
+
+/** Rozcestník oblasti, ve které stránka stojí. Na něm samotném odkaz nesvítí. */
+const parent = computed(() => {
+  const root = route.path.startsWith('/playground') ? '/playground' : '/showcase'
+  return route.path === root ? null : root
+})
 </script>
 
 <template>
@@ -16,8 +22,8 @@ const route = useRoute()
 
       <AreaSwitch />
 
-      <!-- Jen uvnitř konkrétní ukázky. Na rozcestníku by vedl sám na sebe. -->
-      <NuxtLink v-if="route.path !== '/showcase'" to="/showcase">
+      <!-- Jen uvnitř konkrétní položky. Na rozcestníku by vedl sám na sebe. -->
+      <NuxtLink v-if="parent" :to="parent">
         <UButton icon="lucide:arrow-left" label="Zpět na rozcestník" variant="plain" size="sm" />
       </NuxtLink>
 

@@ -1,5 +1,10 @@
 @import 'tailwindcss';
+@import '../../designs/_base.css';
 @import '../../designs/visionos.css';
+@import '../../designs/pastel.css';
+@import '../../designs/linka.css';
+@import '../../designs/mrizka.css';
+@import '../../designs/karta.css';
 
 @source '../../../app';
 
@@ -7,6 +12,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /*
+   * Zaoblení je token, ne pevná třída v komponentě. Je to jedna z mála věcí,
+   * kterou se designy liší strukturálně — pilulka a obdélník s 6px rohem
+   * nejsou tatáž komponenta v jiné barvě.
+   */
+  --radius-control: 999px;
+  --radius-surface: 24px;
+  --radius-chip: 8px;
+
   /* SF Pro se na web dát nesmí (licence Applu). Na Macu ho vytáhne
      -apple-system, jinde se to degraduje na systémové písmo. */
   --font-sans:

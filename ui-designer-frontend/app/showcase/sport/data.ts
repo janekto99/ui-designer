@@ -162,6 +162,102 @@ export const tournaments: Tournament[] = [
   },
 ]
 
+tournaments.push({
+  id: 'genoa',
+  name: 'Challenger Genoa',
+  category: 'Challenger',
+  surface: 'Clay',
+  country: 'it',
+  matches: [
+    {
+      id: 'g1',
+      time: '11:00',
+      surface: 'Clay',
+      insight: true,
+      players: [
+        p('Thiago Seyboth Wild', 'br', [198, 58, 1.13, 279, 179, 202, 34], { seed: 1 }),
+        p('Gianmarco Ferrari', 'it', [517, 387, 6.00, 1078, 1091, 1014, -68]),
+      ],
+    },
+    {
+      id: 'g2',
+      time: '11:00',
+      surface: 'Clay',
+      players: [
+        p('Massimo Giunta', 'it', [422, 418, 3.00, 567, 535, 504, -23], { entry: 'WC' }),
+        p('Tom Gentzsch', 'de', [145, 145, 1.36, 218, 169, 216, 5]),
+      ],
+    },
+    {
+      id: 'g3',
+      time: '12:30',
+      surface: 'Clay',
+      live: true,
+      players: [
+        p('Franco Agamenone', 'it', [291, 108, 3.50, 322, 351, 408, -16]),
+        p('Matej Dodig', 'hr', [254, 199, 1.28, 372, 205, 222, 32]),
+      ],
+    },
+    {
+      id: 'g4',
+      time: '12:30',
+      surface: 'Clay',
+      insight: true,
+      players: [
+        p('Pedro Martinez', 'es', [148, 36, 1.40, 178, 164, 182, 26]),
+        p('Francesco Forti', 'it', [367, 303, 2.75, 707, 437, 501, 2], { entry: 'WC' }),
+      ],
+    },
+  ],
+})
+
+/** Sporty. Přepínají se výš než všechno ostatní, proto stojí zvlášť. */
+export const sports = [
+  { label: 'Tenis', value: 'tenis', count: 279 },
+  { label: 'Fotbal', value: 'fotbal', count: 0 },
+]
+
+/**
+ * Katalog soutěží pod vybraným sportem. Odpovídá tomu, co je na snímku —
+ * tři úrovně a u každé počet zápasů.
+ */
+export const catalogTree = [
+  {
+    label: 'Muži',
+    value: 'muzi',
+    count: 156,
+    children: [
+      { label: 'ATP', value: 'atp', count: 1, children: [{ label: 'US Open', value: 'us-open', count: 1 }] },
+      {
+        label: 'Challenger',
+        value: 'challenger',
+        count: 69,
+        children: [
+          { label: 'Genoa', value: 'genoa', count: 12 },
+          { label: 'Seville', value: 'seville', count: 12 },
+          { label: 'Cassis', value: 'cassis', count: 11 },
+          { label: 'Tulln', value: 'tulln', count: 11 },
+          { label: 'Istanbul', value: 'istanbul', count: 10 },
+          { label: 'Shanghai', value: 'shanghai', count: 10 },
+          { label: 'Phan Thiet', value: 'phan-thiet', count: 3 },
+        ],
+      },
+      { label: 'ITF', value: 'itf-m', count: 66 },
+      { label: 'UTR', value: 'utr-m', count: 20 },
+    ],
+  },
+  {
+    label: 'Ženy',
+    value: 'zeny',
+    count: 123,
+    children: [
+      { label: 'WTA', value: 'wta', count: 30 },
+      { label: 'ITF', value: 'itf-z', count: 73 },
+      { label: 'UTR', value: 'utr-z', count: 20 },
+    ],
+  },
+]
+
 /** Strom filtrů. Počty odpovídají tomu, co je na snímku. */
 export const sportTree = [
   {

@@ -45,7 +45,7 @@ const paddings = { none: '', sm: 'p-3', md: 'p-4', lg: 'p-6' } as const
     :is="as"
     :tabindex="interactive ? 0 : undefined"
     :class="cn(
-      'rounded-3xl',
+      'rounded-surface',
       materials[props.material],
       paddings[props.padding],
       interactive && [

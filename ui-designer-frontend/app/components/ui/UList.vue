@@ -31,7 +31,7 @@ const props = withDefaults(
       role="list"
       :aria-label="ariaLabel"
       :class="props.variant === 'plain'
-        ? 'vos-view-thin divide-y divide-(--separator) overflow-hidden rounded-2xl'
+        ? 'vos-view-thin divide-y divide-(--separator) overflow-hidden rounded-surface'
         : 'flex flex-col gap-2'"
     >
       <slot />

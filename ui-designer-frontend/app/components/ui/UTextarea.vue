@@ -58,7 +58,7 @@ watch(model, () => nextTick(resize))
   <div :class="cn('flex flex-col gap-1.5', props.class)">
     <div
       :class="cn(
-        'flex rounded-2xl bg-(--field-fill) shadow-(--recessed-shadow) transition-colors duration-150',
+        'flex rounded-surface bg-(--field-fill) shadow-(--recessed-shadow) transition-colors duration-150',
         'hover:bg-(--field-fill-hover)',
         'focus-within:bg-(--field-fill-focus) focus-within:ring-2 focus-within:ring-(--focus-ring)',
         disabled && 'pointer-events-none opacity-40',

@@ -28,10 +28,21 @@ export interface TreeNode<V> {
 const props = withDefaults(
   defineProps<{
     nodes: TreeNode<T>[]
+    /**
+     * Jak se pozná vybraný řádek:
+     *
+     * - `solid` — celý řádek vybarvený, čte se na první pohled
+     * - `soft` — jemný nádech akcentu, drží hustotu a nekřičí
+     * - `subtle` — jen ztučnění a linka vlevo; menu zůstane pozadím
+     *
+     * V dlouhém stromu překřičí plná výplň i obsah vedle, proto není `solid`
+     * automaticky správná volba.
+     */
+    selection?: 'solid' | 'soft' | 'subtle'
     ariaLabel?: string
     class?: ClassValue
   }>(),
-  { ariaLabel: undefined, class: undefined },
+  { selection: 'solid', ariaLabel: undefined, class: undefined },
 )
 
 const model = defineModel<T | undefined>({ default: undefined })
@@ -128,6 +139,16 @@ function activate(row: Row) {
 
 // Statické třídy, ne dopočítávané odsazení — Tailwind skenuje zdroj.
 const indents = ['pl-2', 'pl-6', 'pl-10', 'pl-14'] as const
+
+/*
+ * `subtle` musí mít rovný levý roh: přes zaoblení by se z linky stal oblouk
+ * a vypadalo by to jako chyba vykreslení, ne jako značka výběru.
+ */
+const selectedClass = computed(() => ({
+  solid: 'vos-selected',
+  soft: 'bg-(--tone-accent-surface) font-medium text-(--tone-accent-strong)',
+  subtle: 'vos-plain rounded-none border-l-2 border-(--tone-accent) font-semibold text-(--fg-primary)',
+}[props.selection]))
 </script>
 
 <template>
@@ -154,7 +175,7 @@ const indents = ['pl-2', 'pl-6', 'pl-10', 'pl-14'] as const
         'vos-surface flex cursor-pointer items-center gap-2 rounded-xl py-1.5 pr-2.5 text-left outline-none',
         'focus-visible:ring-2 focus-visible:ring-(--focus-ring)',
         indents[Math.min(row.level, 3)],
-        row.node.value === model ? 'vos-selected' : 'vos-plain',
+        row.node.value === model ? selectedClass : 'vos-plain',
         row.node.disabled && 'pointer-events-none opacity-40',
       )"
       @click="activate(row); focused = row.node.value"
@@ -180,8 +201,12 @@ const indents = ['pl-2', 'pl-6', 'pl-10', 'pl-14'] as const
 
       <span
         v-if="row.node.count !== undefined"
-        class="shrink-0 text-footnote"
-        :class="row.node.value === model ? 'opacity-60' : 'text-(--fg-tertiary)'"
+        class="shrink-0 text-footnote tabular-nums"
+        :class="row.node.value === model && selection === 'solid'
+          ? 'opacity-60'
+          : row.node.value === model && selection === 'soft'
+            ? 'text-(--tone-accent-strong)'
+            : 'text-(--fg-tertiary)'"
       >{{ row.node.count }}</span>
     </button>
   </div>
