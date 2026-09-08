@@ -129,7 +129,10 @@ const toneClasses: Record<Tone, string> = {
             scope="col"
             :aria-sort="ariaSort(column)"
             :class="cn(
-              'pb-1.5 text-caption-2 font-semibold tracking-wide text-(--fg-tertiary) uppercase',
+              // Ne `--fg-tertiary`: 30 % krytí dá na hlavičce 2,7 : 1 a to je
+              // pod WCAG AA. Dvanáctibodové verzálky nejsou „velký text“,
+              // takže platí 4,5 : 1, ne 3 : 1. Změřeno, ne odhadnuto.
+              'pb-1.5 text-caption-2 font-semibold tracking-wide text-(--fg-secondary) uppercase',
               alignClass[alignOf(column)],
               pad,
               stickyFirst && index === 0 && 'sticky left-0 z-1',

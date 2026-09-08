@@ -32,7 +32,9 @@ const route = useRoute()
     </aside>
 
     <div class="flex min-w-0 flex-1 flex-col gap-4">
-      <header class="flex items-center justify-end gap-2">
+      <header class="flex items-center gap-2">
+        <AreaSwitch />
+        <div class="flex-1" />
         <ModeToggle />
         <DesignSelect />
       </header>
