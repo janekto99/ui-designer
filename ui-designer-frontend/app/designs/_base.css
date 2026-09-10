@@ -38,6 +38,7 @@
 
   --control-blur: 0px;
   --control-shadow: none;
+  --control-shadow-hover: 0 3px 10px -2px rgb(15 23 42 / 0.2);
   --control-shadow-active: none;
 
   /* Plochy */

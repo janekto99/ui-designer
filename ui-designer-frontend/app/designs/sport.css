@@ -54,8 +54,11 @@
     radial-gradient(120% 140% at 50% -25%, rgb(255 255 255 / 0.45) 0%, transparent 62%),
     radial-gradient(120% 140% at 50% 125%, rgb(255 255 255 / 0.25) 0%, transparent 62%);
 
+  --platter-tint-hover: rgb(255 255 255 / 0.78);
+
   --control-blur: 20px;
   --control-shadow: 0 1px 2px rgb(15 39 64 / 0.06);
+  --control-shadow-hover: 0 3px 10px -2px rgb(15 39 64 / 0.22);
   --control-shadow-active: none;
 
   --panel-tint: rgb(255 255 255 / 0.62);
@@ -194,7 +197,9 @@
     radial-gradient(120% 140% at 50% -25%, rgb(255 255 255 / 0.14) 0%, transparent 62%),
     radial-gradient(120% 140% at 50% 125%, rgb(255 255 255 / 0.08) 0%, transparent 62%);
 
+  --platter-tint-hover: rgb(230 237 246 / 0.16);
   --control-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  --control-shadow-hover: 0 3px 10px -2px rgb(0 0 0 / 0.55);
   --panel-tint: rgb(22 32 46 / 0.72);
   --panel-veil: rgb(230 237 246 / 0.04);
   --panel-shadow: 0 12px 32px -8px rgb(0 0 0 / 0.5);

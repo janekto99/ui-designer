@@ -160,7 +160,7 @@
     --control-tint: var(--platter-tint);
     --control-veil: var(--platter-veil);
     --control-specular-opacity: 1;
-    --control-box-shadow: var(--control-shadow);
+    --control-box-shadow: var(--control-shadow-hover, var(--control-shadow));
     --control-backdrop: blur(var(--control-blur)) saturate(180%);
   }
 
@@ -187,6 +187,15 @@
   --control-specular-opacity: 1;
   --control-box-shadow: var(--control-shadow);
   --control-backdrop: blur(var(--control-blur)) saturate(180%);
+
+  /* Pod kurzorem se prvek nadzvedne stínem, ne dalším bílým závojem.
+     Ve světlém režimu je skleněná pilulka už skoro bílá, takže přisvícení
+     jí zvedne jas o jediný stupeň z 255 — změřeno. Stín působí i tam,
+     protože padá na plochu VEDLE prvku. */
+  &:hover:not(:disabled) {
+    --control-tint: var(--platter-tint-hover, var(--platter-tint-active));
+    --control-box-shadow: var(--control-shadow-hover, var(--control-shadow));
+  }
 
   &:hover:not(:disabled)::after {
     opacity: 1;
