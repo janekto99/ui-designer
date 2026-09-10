@@ -12,7 +12,10 @@ export const field = tv({
     root: [
       'relative flex w-full items-center rounded-control',
       'bg-(--field-fill) transition-colors duration-150',
-      'shadow-(--recessed-shadow)',
+      // Obrys, ne jen prohlubeň. Ve světlém režimu je pole bílé na bílé
+      // ploše a vyhloubení ho neoddělí — definici tam musí nést hrana.
+      // V tmavém je token jemný, protože tam odděluje výplň.
+      'shadow-(--recessed-shadow) ring-1 ring-(--field-edge)',
       'hover:bg-(--field-fill-hover)',
       'focus-within:bg-(--field-fill-focus)',
       'focus-within:ring-2 focus-within:ring-(--focus-ring)',

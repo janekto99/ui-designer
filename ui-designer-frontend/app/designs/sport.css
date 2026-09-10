@@ -78,6 +78,21 @@
 
   --separator: rgb(15 39 64 / 0.1);
 
+  /* Obrys pole. Hodnota je nejsvětlejší, která drží WCAG 1.4.11 (3:1) na
+     VŠECH plochách, kde pole reálně leží — ne jen na té nejsvětlejší:
+
+       bílá vnitřek dialogu  3,68:1
+       plocha dialogu        3,46:1
+       panel lišty           3,14:1
+       náhled v katalogu     3,10:1
+
+     Osmiprocentní `--border` dával 1,06:1, tedy nic. Prohlubeň to ve
+     světlém režimu neutáhne: bílé pole na bílé ploše je taky 1,06:1. */
+  --field-edge: #74879f;
+  /* Sklo na světlé ploše. Vybráno měřením: 0,40 dá v dialogu 1,82:1
+     a v liště 1,53:1 — při 0,50 už jsou z pilulek orámované krabičky. */
+  --control-edge: rgb(15 39 64 / 0.4);
+
   --field-fill: #ffffff;
   --field-fill-hover: #f6f8fb;
   --field-fill-focus: #ffffff;
@@ -212,6 +227,11 @@
   --view-recessed: #131d2a;
 
   --separator: rgb(230 237 246 / 0.12);
+
+  /* V tmavém nese oddělení výplň — pole je prohlubeň pod plochou. Obrys
+     proto zůstává jemný a sklo ho nepotřebuje vůbec. */
+  --field-edge: rgb(230 237 246 / 0.18);
+  --control-edge: transparent;
 
   --field-fill: #131d2a;
   --field-fill-hover: #16202e;

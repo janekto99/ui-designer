@@ -185,7 +185,12 @@
   --control-tint: var(--platter-tint);
   --control-veil: var(--platter-veil);
   --control-specular-opacity: 1;
-  --control-box-shadow: var(--control-shadow);
+  /* Hairline navíc ke stínu. Na SVĚTLÉ ploše nemá bílý závoj čím vystoupit
+     (bílá na bílé dá 1,04:1), takže hranu musí nakreslit inkoust. V tmavém
+     je token průhledný — tam to zvládne specular prstenec. */
+  --control-box-shadow:
+    var(--control-shadow),
+    inset 0 0 0 1px var(--control-edge, transparent);
   --control-backdrop: blur(var(--control-blur)) saturate(180%);
 
   /* Pod kurzorem se prvek nadzvedne stínem, ne dalším bílým závojem.
@@ -194,7 +199,9 @@
      protože padá na plochu VEDLE prvku. */
   &:hover:not(:disabled) {
     --control-tint: var(--platter-tint-hover, var(--platter-tint-active));
-    --control-box-shadow: var(--control-shadow-hover, var(--control-shadow));
+    --control-box-shadow:
+      var(--control-shadow-hover, var(--control-shadow)),
+      inset 0 0 0 1px var(--control-edge, transparent);
   }
 
   &:hover:not(:disabled)::after {
