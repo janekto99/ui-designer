@@ -122,6 +122,15 @@
   --tone-neutral-solid: #16181d;
   --tone-solid-fg: #ffffff;
 
+  /* Přechod značky. V základu je jen záloha odvozená z accentu — varianta
+     `brand` tak nakreslí něco v každém designu, i když si žádný přechod
+     nedefinoval. Design, který značku má, si ho přepíše. */
+  --brand-gradient: linear-gradient(
+    100deg,
+    var(--tone-accent-strong) 0%,
+    var(--tone-accent) 100%
+  );
+
   --focus-ring: #2563eb;
 
   /* Pozadí stránky. Plochá barva, ne scéna. */

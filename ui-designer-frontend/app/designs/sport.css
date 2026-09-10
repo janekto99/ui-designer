@@ -141,6 +141,11 @@
 
   --tone-solid-fg: #ffffff;
 
+  /* Výplň značkového tlačítka, opsaná ze `sport-frontend`. Vychází
+     z visionOS, ale konec je ztmavený: originál končí na #008ffc a bílý
+     štítek na něm má 3,32:1. Tady 4,55:1. */
+  --brand-gradient: linear-gradient(100deg, #005fae 0%, #0074e4 100%);
+
   --focus-ring: #2678c8;
 
   /* Scéna pod sklem. Modrá řada projektu, ne fotografie — sklo potřebuje
@@ -251,6 +256,10 @@
   --tone-neutral-solid: #e6edf6;
 
   --tone-solid-fg: #0d1520;
+
+  /* V tmavém jako visionOS a bez krácení — text je tu inkoustový, ne bílý,
+     takže světlá modrá je naopak výhoda: 7,8:1 a 5,1:1. */
+  --brand-gradient: linear-gradient(100deg, #58aeff 0%, #0e86ff 100%);
 
   --focus-ring: #4a97e0;
 

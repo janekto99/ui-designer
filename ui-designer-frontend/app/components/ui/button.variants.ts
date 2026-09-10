@@ -32,6 +32,8 @@ export const button = tv({
       /** Plná neprůhledná výplň. `selected` je jeho neutrální podoba. */
       solid: { base: 'vos-solid' },
       selected: { base: 'vos-selected' },
+      /** Značková výplň — plný přechod. Tón neposlouchá, značka je jedna. */
+      brand: { base: 'vos-brand' },
     },
     tone: {
       neutral: { base: 'vos-tone-neutral' },
@@ -91,5 +93,5 @@ export type ButtonVariant = NonNullable<ButtonVariants['variant']>
 export type Tone = NonNullable<ButtonVariants['tone']>
 
 export const buttonSizes: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl']
-export const buttonVariantNames: ButtonVariant[] = ['plain', 'glass', 'soft', 'solid', 'selected']
+export const buttonVariantNames: ButtonVariant[] = ['plain', 'glass', 'soft', 'solid', 'selected', 'brand']
 export const tones: Tone[] = ['neutral', 'accent', 'success', 'warning', 'danger', 'info']

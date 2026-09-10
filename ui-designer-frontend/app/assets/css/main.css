@@ -333,6 +333,37 @@
   }
 }
 
+/*
+ * Značková výplň — plný přechod místo jedné barvy. Tón neposlouchá schválně:
+ * značka je jedna a nemá „varovnou" ani „úspěšnou" podobu. Proto se s `tone-*`
+ * nekombinuje, na rozdíl od `vos-solid`.
+ */
+@utility vos-brand {
+  color: var(--tone-solid-fg);
+  background-image: var(--brand-gradient);
+  --control-tint: transparent;
+  --control-veil: transparent;
+  --control-specular-opacity: 0;
+  --control-box-shadow: var(--control-shadow);
+  --control-backdrop: none;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.08);
+  }
+
+  &:active:not(:disabled) {
+    filter: brightness(0.94);
+    --control-box-shadow: var(--control-shadow-active);
+  }
+
+  &:disabled {
+    color: var(--fg-disabled);
+    background-image: none;
+    --control-tint: var(--platter-tint-disabled);
+    --control-box-shadow: none;
+  }
+}
+
 /* Okno / panel — velké rozostření a dva stíny (Blur + Shadow Big z Figmy). */
 @utility vos-panel {
   position: relative;

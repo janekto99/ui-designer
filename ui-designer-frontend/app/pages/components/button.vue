@@ -55,6 +55,16 @@ const snippet = computed(() => {
 
   return `<UButton ${attrs.join(' ')} />`
 })
+
+/*
+ * Tři návrhy dvojice akcí v hlavičce. Tichá akce (`Přihlásit`) je všude
+ * `glass` — mění se jen ta hlavní, protože právě o ní se rozhoduje.
+ */
+const authPairs = [
+  { key: 'A', variant: 'solid' as const, tone: 'neutral' as const, note: 'inkoust — nejtišší, drží se katalogu' },
+  { key: 'B', variant: 'solid' as const, tone: 'accent' as const, note: 'accent — barva značky, výraznější' },
+  { key: 'C', variant: 'brand' as const, tone: 'neutral' as const, note: 'přechod jako logo — nejvýraznější' },
+]
 </script>
 
 <template>
@@ -101,6 +111,31 @@ const snippet = computed(() => {
           <div v-for="v in buttonVariantNames" :key="v" class="flex items-center gap-3">
             <span class="w-16 shrink-0 text-right text-caption-1 text-(--fg-tertiary)">{{ v }}</span>
             <UButton v-for="t in tones" :key="t" :label="t" :variant="v" :tone="t" size="sm" />
+          </div>
+        </div>
+      </PreviewStage>
+    </DocSection>
+
+    <DocSection
+      title="Dvojice akcí v liště"
+      description="Tři návrhy, jak může vypadat Přihlásit + Registrovat v hlavičce webu. Liší se jen tím, co nese hlavní akce — tichá akce je ve všech třech stejná."
+    >
+      <PreviewStage min-height="16rem">
+        <div class="flex flex-col gap-5">
+          <div v-for="pair in authPairs" :key="pair.key" class="flex items-center gap-4">
+            <span class="w-6 shrink-0 text-right text-caption-1 font-semibold text-(--fg-tertiary)">
+              {{ pair.key }}
+            </span>
+            <div class="flex items-center gap-2.5">
+              <UButton label="Přihlásit" variant="glass" size="sm" />
+              <UButton
+                label="Registrovat"
+                :variant="pair.variant"
+                :tone="pair.tone"
+                size="sm"
+              />
+            </div>
+            <span class="text-caption-1 text-(--fg-tertiary)">{{ pair.note }}</span>
           </div>
         </div>
       </PreviewStage>
