@@ -98,8 +98,14 @@
   background-color: var(--control-tint, transparent);
   background-image: linear-gradient(var(--control-veil, transparent), var(--control-veil, transparent));
   box-shadow: var(--control-box-shadow, none);
-  backdrop-filter: blur(var(--control-radius-blur, 0px)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--control-radius-blur, 0px)) saturate(180%);
+
+  /* Filtr je celý v proměnné, ne jen poloměr rozostření. `blur(0px)` není
+     totéž co žádný filtr: `saturate(180%)` zůstane aktivní a založí vlastní
+     backdrop root, takže i dokonale průhledný prvek nakreslí na skleněném
+     panelu světlou skvrnu. Na ikonových tlačítkách to vypadalo jako
+     kolečka, která nikdo nechtěl. */
+  backdrop-filter: var(--control-backdrop, none);
+  -webkit-backdrop-filter: var(--control-backdrop, none);
   transition-property: background-color, background-image, box-shadow, color, opacity, transform;
   transition-duration: 180ms;
   transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
@@ -148,14 +154,14 @@
   --control-veil: transparent;
   --control-specular-opacity: 0;
   --control-box-shadow: none;
-  --control-radius-blur: 0px;
+  --control-backdrop: none;
 
   &:hover:not(:disabled) {
     --control-tint: var(--platter-tint);
     --control-veil: var(--platter-veil);
     --control-specular-opacity: 1;
     --control-box-shadow: var(--control-shadow);
-    --control-radius-blur: var(--control-blur);
+    --control-backdrop: blur(var(--control-blur)) saturate(180%);
   }
 
   &:hover:not(:disabled)::after {
@@ -180,7 +186,7 @@
   --control-veil: var(--platter-veil);
   --control-specular-opacity: 1;
   --control-box-shadow: var(--control-shadow);
-  --control-radius-blur: var(--control-blur);
+  --control-backdrop: blur(var(--control-blur)) saturate(180%);
 
   &:hover:not(:disabled)::after {
     opacity: 1;
@@ -208,7 +214,7 @@
   --control-veil: transparent;
   --control-specular-opacity: 0;
   --control-box-shadow: var(--control-shadow);
-  --control-radius-blur: 0px;
+  --control-backdrop: none;
 
   &:hover:not(:disabled) {
     --control-tint: var(--selected-bg-hover);
@@ -281,7 +287,7 @@
   --control-veil: transparent;
   --control-specular-opacity: 0;
   --control-box-shadow: none;
-  --control-radius-blur: 0px;
+  --control-backdrop: none;
 
   &:hover:not(:disabled) {
     --control-tint: var(--tone-solid);
@@ -308,7 +314,7 @@
   --control-veil: transparent;
   --control-specular-opacity: 0;
   --control-box-shadow: var(--control-shadow);
-  --control-radius-blur: 0px;
+  --control-backdrop: none;
 
   &:hover:not(:disabled) {
     filter: brightness(1.08);
